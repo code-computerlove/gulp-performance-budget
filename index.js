@@ -45,32 +45,29 @@ function performanceBudget (perfBudgetJson) {
     var fileSize = parseInt(getCurrentFileSize(file));
     if(!perfObj.hasOwnProperty(extname)){
       perfObj[extname] = { total: fileSize };
+    }else{
+      updateTotal(extname, fileSize);
     }
     
     updatePropValue(extname, fileSize);
     
   }
 
+  function updateTotal(extname, fileSize){
+    //do total
+    var oldVal = perfObj[extname].total;
+    var newVal = oldVal + fileSize;
+    perfObj[extname].total = newVal;
+  }
+
   function updatePropValue(extname, fileSize){
     
-    //console.log(extname +': ' + oldVal + ' + ' + fileSize + ' = ' + newVal);
-
-    //do total
+    //add files
     if(!perfObj[extname].hasOwnProperty('files')){
       perfObj[extname].files = [];
     }
     perfObj[extname].files.push({file: currentFile.path, size: fileSize});
     
-
-    if(!perfObj[extname].hasOwnProperty('total')){
-      perfObj[extname].total = fileSize;
-    }else{
-      var oldVal = perfObj[extname].total;
-      var newVal = oldVal + fileSize;
-      perfObj[extname].total = newVal;
-    }
-
-    //do child values
   }
 
   function whichSvg(extname, type){
