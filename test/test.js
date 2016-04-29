@@ -67,7 +67,7 @@ describe('when running gulp-performance-budget', function () {
       });
   });
 
-  it('should create an object containing a property image', function (done) {
+  it('should create an object containing a property images', function (done) {
     gulp.src(testImageSrc)
       .pipe(performanceBudget(jsonFileImage))
       .pipe(gulp.dest('dest'))
@@ -75,7 +75,7 @@ describe('when running gulp-performance-budget', function () {
         fs.readFile(jsonFileImage, 'utf8', function (err, data) {
           if (err) throw (err);
           var dataObj = JSON.parse(data);
-          dataObj.should.have.property('image');
+          dataObj.should.have.property('images');
           done();
         });
       });

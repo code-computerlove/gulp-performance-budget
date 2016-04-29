@@ -11,6 +11,9 @@ var name;
 var obj = {};
 var perfObj = {};
 var currentFile;
+var images = 'images';
+var fonts = 'fonts';
+var svg = 'svg';
 
 
 // Consts
@@ -61,10 +64,10 @@ function performanceBudget (perfBudgetJson) {
     
     //font-face
     var fileContents = currentFile.contents.toString();
-    var typeMatch = 'images';
+    var typeMatch = images;
 
     if(fileContents.indexOf('font-face') > 0){
-      typeMatch = 'fonts';
+      typeMatch = fonts;
     };
 
     return type === typeMatch;
@@ -75,19 +78,19 @@ function performanceBudget (perfBudgetJson) {
 
     // images
     if((/(gif|jpg|jpeg|tiff|png)$/i).test(extRef)){
-       extRef = 'image';
+       extRef = images;
     }
-    if(extRef === 'svg' && whichSvg(extRef, 'images')){
-      extRef = 'image';  
+    if(extRef === svg && whichSvg(extRef, images)){
+      extRef = images;  
     }
       
     //fonts
     if((/(woff|woff2|eot|ttf)$/i).test(extRef)){
-      extRef = 'fonts'; 
+      extRef = fonts; 
     }
 
-    if(extRef === 'svg' && whichSvg(extRef, 'fonts')){
-      extRef = 'fonts';
+    if(extRef === svg && whichSvg(extRef, fonts)){
+      extRef = fonts;
     }
 
     return extRef;

@@ -14,7 +14,7 @@ SVG's are determined based on the "font-face" attribute being present. If not pr
 ```json
 {
 	"css": 28,
-	"image": 1016,
+	"images": 1016,
 	"js": 245,
 	"fonts": 113
 }
