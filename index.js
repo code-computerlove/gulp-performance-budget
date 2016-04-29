@@ -44,19 +44,33 @@ function performanceBudget (perfBudgetJson) {
     extname = setExtensionRef(extname);
     var fileSize = parseInt(getCurrentFileSize(file));
     if(!perfObj.hasOwnProperty(extname)){
-      perfObj[extname] = fileSize;
-    }else{
-      updatePropValue(extname, fileSize);
+      perfObj[extname] = { total: fileSize };
     }
+    
+    updatePropValue(extname, fileSize);
+    
   }
 
   function updatePropValue(extname, fileSize){
-    var oldVal = perfObj[extname];
-    var newVal = oldVal + fileSize;
+    
     //console.log(extname +': ' + oldVal + ' + ' + fileSize + ' = ' + newVal);
-    if(perfObj.hasOwnProperty(extname)){
-      perfObj[extname] = newVal;
+
+    //do total
+    if(!perfObj[extname].hasOwnProperty('files')){
+      perfObj[extname].files = [];
     }
+    perfObj[extname].files.push({file: currentFile.path, size: fileSize});
+    
+
+    if(!perfObj[extname].hasOwnProperty('total')){
+      perfObj[extname].total = fileSize;
+    }else{
+      var oldVal = perfObj[extname].total;
+      var newVal = oldVal + fileSize;
+      perfObj[extname].total = newVal;
+    }
+
+    //do child values
   }
 
   function whichSvg(extname, type){
@@ -88,7 +102,6 @@ function performanceBudget (perfBudgetJson) {
     if((/(woff|woff2|eot|ttf)$/i).test(extRef)){
       extRef = fonts; 
     }
-
     if(extRef === svg && whichSvg(extRef, fonts)){
       extRef = fonts;
     }

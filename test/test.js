@@ -92,7 +92,7 @@ describe('when running gulp-performance-budget', function () {
           var dataObj = JSON.parse(data);
           var cssVal = 0;
           if(dataObj.hasOwnProperty(ext)){
-            cssVal = parseInt(dataObj[ext]);
+            cssVal = parseInt(dataObj[ext].total);
           }
           cssVal.should.be.greaterThan(0);
           done();

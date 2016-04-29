@@ -9,16 +9,6 @@ The task will create an object based on the file extension.
 
 SVG's are determined based on the "font-face" attribute being present. If not present it will be grouped under the images key
 
-###Example of output
-
-```json
-{
-	"css": 28,
-	"images": 1016,
-	"js": 245,
-	"fonts": 113
-}
-```
 
 ###Usage
 
@@ -68,6 +58,90 @@ For a differnt file location; pass the location as a parameter into performanceB
 
 ```javascript
 performanceBudget('/new-folder/performance-budget.json')
+```
+
+###Example of output
+
+```json
+{
+  "fonts": {
+    "total": 339,
+    "files": [
+      {
+        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.svg",
+        "size": 98
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.ttf",
+        "size": 61
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff",
+        "size": 30
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff2",
+        "size": 23
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-regular-webfont.eot",
+        "size": 29
+      }
+    ]
+  },
+  "images": {
+    "total": 2828,
+    "files": [
+      {
+        "file": "/Sites/gulp-performance-budget/_src/images/cl-logo.svg",
+        "size": 906
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/images/images.jpg",
+        "size": 12
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/images/imgres-1.png",
+        "size": 1002
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/images/imgres.png",
+        "size": 2
+      }
+    ]
+  },
+  "js": {
+    "total": 414,
+    "files": [
+      {
+        "file": "/Sites/gulp-performance-budget/_src/scripts/test.js",
+        "size": 207
+      }
+    ]
+  },
+  "css": {
+    "total": 142,
+    "files": [
+      {
+        "file": "/Sites/gulp-performance-budget/_src/styles/info.css",
+        "size": 57
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/styles/other.css",
+        "size": 0
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/styles/other2.css",
+        "size": 0
+      },
+      {
+        "file": "/Sites/gulp-performance-budget/_src/styles/test.css",
+        "size": 28
+      }
+    ]
+  }
+}
+
 ```
 
 
