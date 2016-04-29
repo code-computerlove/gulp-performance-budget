@@ -65,7 +65,7 @@ performanceBudget('/new-folder/performance-budget.json')
 ```json
 {
   "fonts": {
-    "total": 339,
+    "total": 241,
     "files": [
       {
         "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.svg",
@@ -90,7 +90,7 @@ performanceBudget('/new-folder/performance-budget.json')
     ]
   },
   "images": {
-    "total": 2828,
+    "total": 1922,
     "files": [
       {
         "file": "/Sites/gulp-performance-budget/_src/images/cl-logo.svg",
@@ -111,7 +111,7 @@ performanceBudget('/new-folder/performance-budget.json')
     ]
   },
   "js": {
-    "total": 414,
+    "total": 207,
     "files": [
       {
         "file": "/Sites/gulp-performance-budget/_src/scripts/test.js",
@@ -120,7 +120,7 @@ performanceBudget('/new-folder/performance-budget.json')
     ]
   },
   "css": {
-    "total": 142,
+    "total": 85,
     "files": [
       {
         "file": "/Sites/gulp-performance-budget/_src/styles/info.css",
