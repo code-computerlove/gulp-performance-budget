@@ -100,6 +100,23 @@ describe('when running gulp-performance-budget', function () {
       });
   });
 
+  it('should create a value for fonts if svg is a font', function(done){
+    var fontFile = './_src/fonts/gt-pressura-mono-regular-webfont.svg';
+    var outputFile = './test/svgFontJson.json';
+
+    gulp.src(fontFile)
+    .pipe(performanceBudget(outputFile))
+    .pipe(gulp.dest('dest'))
+    .on('end', function(err, data){
+      fs.readFile(outputFile, 'utf-8', function(err, data){
+        if(err) throw (err);
+        var dataObj = JSON.parse(data);
+        dataObj.should.have.property('fonts');
+        done();
+      })
+    });
+  });
+
   // it('should calculate the sum of 2 file sizes', function (done) {
   //   var file1 = './_src/images/images.jpg';
   //   var file2 = './_src/images/imgres.png';
