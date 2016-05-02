@@ -27,10 +27,19 @@ function performanceBudget (options) {
   perfObj = {};
   var options = extend({}, options);
 
+  function getPath(fullPath){
+    return fullPath.substring(0, fullPath.lastIndexOf("/")+1);
+  }
+
   function writeToFile () {
+    var pathStr = getPath(options.dest);
+    //console.log(pathStr);
+    //console.log(options.dest);
+    mkpath.sync(pathStr);
     fs.writeJson(options.dest, perfObj, function (err, data) {
       if (err) throw (err);
     });
+     
   };
 
   function getCurrentFileSize(file){
@@ -125,8 +134,9 @@ function performanceBudget (options) {
     buildPerfObjects(getFileExtension(file), file);
 
     writeToFile();
-
+   
     cb();
+    
   };
 
   return through.obj(generate);

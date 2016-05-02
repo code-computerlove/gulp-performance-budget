@@ -12,10 +12,10 @@ var testSrc = '_src/**/*';
 var testCSSSrc = '_src/styles/**/*.css';
 var testJSSrc = '_src/scripts/**/*.js';
 var testImageSrc = '_src/images/**/*';
-var jsonFileCSS = './test/cssFiles.json';
-var jsonFileJS = './test/JSFiles.json';
-var jsonFileImage = './test/imageFiles.json';
-var jsonFileAll = './test/allFiles.json';
+var jsonFileCSS = './test/json/cssFiles.json';
+var jsonFileJS = './test/json/JSFiles.json';
+var jsonFileImage = './test/json/imageFiles.json';
+var jsonFileAll = './test/json/allFiles.json';
 
 
 var filePath = '/_src/';
@@ -102,7 +102,7 @@ describe('when running gulp-performance-budget', function () {
 
   it('should create a value for fonts if svg is a font', function(done){
     var fontFile = './_src/fonts/gt-pressura-mono-regular-webfont.svg';
-    var outputFile = './test/svgFontJson.json';
+    var outputFile = './test/json/svgFontJson.json';
 
     gulp.src(fontFile)
     .pipe(performanceBudget({dest: outputFile}))
