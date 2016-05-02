@@ -6,6 +6,8 @@ var fs = Promise.promisifyAll(require('fs-extra'));
 var path = require('path');
 var pathExists = require('path-exists');
 var getFileSize = require('filesize');
+var extend = require('node.extend');
+var mkpath = require('mkpath');
 
 var name;
 var obj = {};
@@ -18,16 +20,15 @@ var svg = 'svg';
 
 // Consts
 const PLUGIN_NAME = 'performance-budget';
-const jsonFile = './test.json';
 const rootPath = __dirname;
 
-function performanceBudget (perfBudgetJson) {
+function performanceBudget (options) {
 
   perfObj = {};
-  perfBudgetJson = perfBudgetJson || jsonFile;
+  var options = extend({}, options);
 
   function writeToFile () {
-    fs.writeJson(perfBudgetJson, perfObj, function (err, data) {
+    fs.writeJson(options.dest, perfObj, function (err, data) {
       if (err) throw (err);
     });
   };

@@ -41,7 +41,7 @@ describe('when running gulp-performance-budget', function () {
 
 	it('should write a json config to file', function (done) {
 		gulp.src(testSrc)
-			.pipe(performanceBudget(jsonFileAll))
+			.pipe(performanceBudget({dest: jsonFileAll}))
 			.pipe(gulp.dest('dest'))
 			.on('end', function (err, data) {
        var _self = this;
@@ -55,7 +55,7 @@ describe('when running gulp-performance-budget', function () {
 
   it('should create an object containing a property css', function (done) {
     gulp.src(testCSSSrc)
-      .pipe(performanceBudget(jsonFileCSS))
+      .pipe(performanceBudget({dest: jsonFileCSS}))
       .pipe(gulp.dest('dest'))
       .on('end', function (err, data) {
         fs.readFile(jsonFileCSS, 'utf8', function (err, data) {
@@ -69,7 +69,7 @@ describe('when running gulp-performance-budget', function () {
 
   it('should create an object containing a property images', function (done) {
     gulp.src(testImageSrc)
-      .pipe(performanceBudget(jsonFileImage))
+      .pipe(performanceBudget({dest: jsonFileImage}))
       .pipe(gulp.dest('dest'))
       .on('end', function (err, data) {
         fs.readFile(jsonFileImage, 'utf8', function (err, data) {
@@ -84,7 +84,7 @@ describe('when running gulp-performance-budget', function () {
   it('should return a css value greater than zero', function(done){
     var ext = 'css';
      gulp.src(testCSSSrc)
-      .pipe(performanceBudget(jsonFileCSS))
+      .pipe(performanceBudget({dest: jsonFileCSS}))
       .pipe(gulp.dest('dest'))
       .on('end', function (err, data) {
         fs.readFile(jsonFileCSS, 'utf8', function (err, data) {
@@ -105,7 +105,7 @@ describe('when running gulp-performance-budget', function () {
     var outputFile = './test/svgFontJson.json';
 
     gulp.src(fontFile)
-    .pipe(performanceBudget(outputFile))
+    .pipe(performanceBudget({dest: outputFile}))
     .pipe(gulp.dest('dest'))
     .on('end', function(err, data){
       fs.readFile(outputFile, 'utf-8', function(err, data){
