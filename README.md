@@ -1,6 +1,6 @@
 # performance-budget
 
-A gulp task to produce a json output of the client side assets (file size) used on your website
+A task to produce a json output of the client side assets (file size) used on your website
 
 The task will create an object based on the file extension. 
 
@@ -18,13 +18,7 @@ install dependencies
 npm install performance-budget
 ```
 
-run package
-
-```
-gulp
-```
-
-###Basic setup
+###Basic setup using (gulp)
 ```javascript
 var performanceBudget = require('performance-budget');
 
@@ -39,7 +33,7 @@ The dest is just a placeholder and has no influence on where your output is save
 
 the default location for your json file will be at the root of the current working directory.
 
-###Specific location
+###Specific location (using gulp)
 
 ```javascript
 var performanceBudget = require('performance-budget');
