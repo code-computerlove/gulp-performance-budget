@@ -15,7 +15,7 @@ SVG's are determined based on the "font-face" attribute being present. If not pr
 install dependencies
 
 ```
-npm install gulp-performance-budget
+npm install performance-budget
 ```
 
 run package
@@ -26,7 +26,7 @@ gulp
 
 ###Basic setup
 ```javascript
-var performanceBudget = require('gulp-performance-budget');
+var performanceBudget = require('performance-budget');
 
 gulpTask('default', function(){
 	gulp.src('your-files/**/*')
@@ -42,7 +42,7 @@ the default location for your json file will be at the root of the current worki
 ###Specific location
 
 ```javascript
-var performanceBudget = require('gulp-performance-budget');
+var performanceBudget = require('performance-budget');
 
 gulpTask('default', function(){
 	gulp.src('your-files/**/*')
