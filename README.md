@@ -1,4 +1,4 @@
-# gulp-performance-budget
+# performance-budget
 
 A gulp task to produce a json output of the client side assets (file size) used on your website
 

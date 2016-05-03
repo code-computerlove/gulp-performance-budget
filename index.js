@@ -1,9 +1,8 @@
-var gulp = require('gulp');
 var through = require('through2');
-var gutil = require('gulp-util');
 var Promise = require('bluebird');
 var fs = Promise.promisifyAll(require('fs-extra'));
 var path = require('path');
+var PluginError = require('plugin-error');
 var pathExists = require('path-exists');
 var getFileSize = require('filesize');
 var extend = require('node.extend');
@@ -131,7 +130,7 @@ function performanceBudget (options) {
     }
 
     if (file.isStream()) {
-      cb(new gutil.PluginError(PLUGIN_NAME, 'Streaming not supported'));
+      cb(new PluginError(PLUGIN_NAME, 'Streaming not supported'));
       return;
     };
 

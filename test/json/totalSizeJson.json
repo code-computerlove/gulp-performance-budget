@@ -3,7 +3,7 @@
     "total": 1002,
     "files": [
       {
-        "file": "/Users/matthewmacartney/Development/Code/gulp-performance-budget/_src/totalFileSize/imgres-1.png",
+        "file": "/Sites/gulp-performance-budget/_src/totalFileSize/imgres-1.png",
         "size": 1002
       }
     ]
@@ -13,7 +13,7 @@
     "total": 57,
     "files": [
       {
-        "file": "/Users/matthewmacartney/Development/Code/gulp-performance-budget/_src/totalFileSize/info.css",
+        "file": "/Sites/gulp-performance-budget/_src/totalFileSize/info.css",
         "size": 57
       }
     ]
@@ -22,7 +22,7 @@
     "total": 207,
     "files": [
       {
-        "file": "/Users/matthewmacartney/Development/Code/gulp-performance-budget/_src/totalFileSize/test.js",
+        "file": "/Sites/gulp-performance-budget/_src/totalFileSize/test.js",
         "size": 207
       }
     ]
