@@ -17,6 +17,7 @@ var images = 'images';
 var fonts = 'fonts';
 var svg = 'svg';
 
+var totalFileSize;
 
 // Consts
 const PLUGIN_NAME = 'performance-budget';
@@ -25,6 +26,7 @@ const rootPath = __dirname;
 function performanceBudget (options) {
 
   perfObj = {};
+  totalFileSize = 0;
   var options = extend({}, options);
 
   function getPath(fullPath){
@@ -39,7 +41,7 @@ function performanceBudget (options) {
     fs.writeJson(options.dest, perfObj, function (err, data) {
       if (err) throw (err);
     });
-     
+
   };
 
   function getCurrentFileSize(file){
@@ -53,14 +55,19 @@ function performanceBudget (options) {
   function buildPerfObjects(extname, file){
     extname = setExtensionRef(extname);
     var fileSize = parseInt(getCurrentFileSize(file));
+
+
+    totalFileSize += fileSize;
+
+
     if(!perfObj.hasOwnProperty(extname)){
       perfObj[extname] = { total: fileSize };
-    }else{
+    } else {
       updateTotal(extname, fileSize);
     }
-    
+
     updatePropValue(extname, fileSize);
-    
+
   }
 
   function updateTotal(extname, fileSize){
@@ -71,18 +78,18 @@ function performanceBudget (options) {
   }
 
   function updatePropValue(extname, fileSize){
-    
+
     //add files
     if(!perfObj[extname].hasOwnProperty('files')){
       perfObj[extname].files = [];
     }
     perfObj[extname].files.push({file: currentFile.path, size: fileSize});
-    
+
   }
 
   function whichSvg(extname, type){
     //read svg file and see if property contains font reference
-    
+
     //font-face
     var fileContents = currentFile.contents.toString();
     var typeMatch = images;
@@ -102,12 +109,12 @@ function performanceBudget (options) {
        extRef = images;
     }
     if(extRef === svg && whichSvg(extRef, images)){
-      extRef = images;  
+      extRef = images;
     }
-      
+
     //fonts
     if((/(woff|woff2|eot|ttf)$/i).test(extRef)){
-      extRef = fonts; 
+      extRef = fonts;
     }
     if(extRef === svg && whichSvg(extRef, fonts)){
       extRef = fonts;
@@ -117,7 +124,7 @@ function performanceBudget (options) {
   }
 
   function generate (file, enc, cb) {
-    
+
     if (file.isNull()) {
       cb();
       return;
@@ -129,14 +136,17 @@ function performanceBudget (options) {
     };
 
     currentFile = file;
-    
+
     // TODO these need promises to avoid race conditions;
     buildPerfObjects(getFileExtension(file), file);
 
+    //console.log(totalFileSize);
+    perfObj['totalSize'] = totalFileSize;
+
     writeToFile();
-   
+
     cb();
-    
+
   };
 
   return through.obj(generate);

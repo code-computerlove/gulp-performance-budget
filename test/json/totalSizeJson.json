@@ -1,0 +1,30 @@
+{
+  "images": {
+    "total": 1002,
+    "files": [
+      {
+        "file": "/Users/matthewmacartney/Development/Code/gulp-performance-budget/_src/totalFileSize/imgres-1.png",
+        "size": 1002
+      }
+    ]
+  },
+  "totalSize": 1266,
+  "css": {
+    "total": 57,
+    "files": [
+      {
+        "file": "/Users/matthewmacartney/Development/Code/gulp-performance-budget/_src/totalFileSize/info.css",
+        "size": 57
+      }
+    ]
+  },
+  "js": {
+    "total": 207,
+    "files": [
+      {
+        "file": "/Users/matthewmacartney/Development/Code/gulp-performance-budget/_src/totalFileSize/test.js",
+        "size": 207
+      }
+    ]
+  }
+}

@@ -3,9 +3,10 @@
     "total": 98,
     "files": [
       {
-        "file": "/Work/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.svg",
+        "file": "/Users/matthewmacartney/Development/Code/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.svg",
         "size": 98
       }
     ]
-  }
+  },
+  "totalSize": 98
 }
