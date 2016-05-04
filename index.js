@@ -34,8 +34,6 @@ function performanceBudget (options) {
 
   function writeToFile () {
     var pathStr = getPath(options.dest);
-    //console.log(pathStr);
-    //console.log(options.dest);
     mkpath.sync(pathStr);
     fs.writeJson(options.dest, perfObj, function (err, data) {
       if (err) throw (err);
@@ -54,11 +52,7 @@ function performanceBudget (options) {
   function buildPerfObjects(extname, file){
     extname = setExtensionRef(extname);
     var fileSize = parseInt(getCurrentFileSize(file));
-
-
     totalFileSize += fileSize;
-
-
     if(!perfObj.hasOwnProperty(extname)){
       perfObj[extname] = { total: fileSize };
     } else {
@@ -66,7 +60,6 @@ function performanceBudget (options) {
     }
 
     updatePropValue(extname, fileSize);
-
   }
 
   function updateTotal(extname, fileSize){
@@ -122,6 +115,10 @@ function performanceBudget (options) {
     return extRef;
   }
 
+  function pushTotalFileSizeToJson () {
+    perfObj['totalSize'] = totalFileSize;
+  }
+
   function generate (file, enc, cb) {
 
     if (file.isNull()) {
@@ -138,9 +135,7 @@ function performanceBudget (options) {
 
     // TODO these need promises to avoid race conditions;
     buildPerfObjects(getFileExtension(file), file);
-
-    //console.log(totalFileSize);
-    perfObj['totalSize'] = totalFileSize;
+    pushTotalFileSizeToJson();
 
     writeToFile();
 
