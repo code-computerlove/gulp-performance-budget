@@ -119,6 +119,13 @@ function performanceBudget (options) {
     perfObj['totalSize'] = totalFileSize;
   }
 
+  function calculatePercentageForEachFileType () {
+    for(var item in perfObj) {
+      var percentage = Math.round((perfObj[item].total / perfObj.totalSize) * 100);
+      perfObj[item]['percentage'] = percentage;
+    }
+  }
+
   function generate (file, enc, cb) {
 
     if (file.isNull()) {
@@ -136,6 +143,7 @@ function performanceBudget (options) {
     // TODO these need promises to avoid race conditions;
     buildPerfObjects(getFileExtension(file), file);
     pushTotalFileSizeToJson();
+    calculatePercentageForEachFileType();
 
     writeToFile();
 

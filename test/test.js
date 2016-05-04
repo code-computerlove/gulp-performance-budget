@@ -154,4 +154,47 @@ describe('when running gulp-performance-budget', function () {
       })
     });
   });
+
+  it('should calculate the percentage of each file type', function (done) {
+    var totalSizePath = './_src/totalFileSize/';
+    var outputFile = './test/json/totalSizeJson.json';
+
+    gulp.src(totalSizePath + '**/*.*')
+    .pipe(performanceBudget({dest: outputFile}))
+    .pipe(gulp.dest('dest'))
+    .on('end', function(err, data){
+      fs.readFile(outputFile, 'utf-8', function(err, data){
+        if(err) throw (err);
+        var dataObj = JSON.parse(data);
+        dataObj.images.should.have.property('percentage').eql(79);
+        done();
+      })
+    });
+  });
+
+  it('should calculate a percentage for each file type that all add up to 100', function (done) {
+    var totalSizePath = './_src/totalFileSize/';
+    var outputFile = './test/json/totalSizeJson.json';
+
+    gulp.src(totalSizePath + '**/*.*')
+    .pipe(performanceBudget({dest: outputFile}))
+    .pipe(gulp.dest('dest'))
+    .on('end', function(err, data){
+      fs.readFile(outputFile, 'utf-8', function(err, data){
+        if(err) throw (err);
+        var dataObj = JSON.parse(data);
+
+        var imagesPercentage = dataObj.images.percentage;
+        var cssPercentage = dataObj.css.percentage;
+        var jsPercentage = dataObj.js.percentage;
+
+        var sumOfPercentage = imagesPercentage + cssPercentage + jsPercentage;
+
+        sumOfPercentage.should.eql(100);
+
+        done();
+      })
+    });
+  });
+
 });

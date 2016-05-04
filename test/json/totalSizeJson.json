@@ -6,7 +6,8 @@
         "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/imgres-1.png",
         "size": 1002
       }
-    ]
+    ],
+    "percentage": 79
   },
   "totalSize": 1266,
   "css": {
@@ -16,7 +17,8 @@
         "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/info.css",
         "size": 57
       }
-    ]
+    ],
+    "percentage": 5
   },
   "js": {
     "total": 207,
@@ -25,6 +27,7 @@
         "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/test.js",
         "size": 207
       }
-    ]
+    ],
+    "percentage": 16
   }
 }
