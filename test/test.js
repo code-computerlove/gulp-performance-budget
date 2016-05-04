@@ -12,23 +12,14 @@ var testSrc = '_src/**/*';
 var testCSSSrc = '_src/styles/**/*.css';
 var testJSSrc = '_src/scripts/**/*.js';
 var testImageSrc = '_src/images/**/*';
+var testTotalSizeSrc = '_src/totalFileSize/**/*';
 
 var jsonSrc = './test/json/';
 var jsonFileCSS = jsonSrc + 'cssFiles.json';
 var jsonFileJS = jsonSrc + 'JSFiles.json';
 var jsonFileImage = jsonSrc + 'imageFiles.json';
 var jsonFileAll = jsonSrc + 'allFiles.json';
-
-var filePath = '/_src/';
-
-function getCurrentFileSize(file){
-  return file.stat ? getFileSize(file.stat.size) : getFileSize(Buffer.byteLength(String(file.contents)));
-}
-
-function getFile(filename) {
-  return fs.readFileAsync(filename);
-};
-
+var jsonFileTotalSize = jsonSrc + 'totalSizeJson.json';
 
 describe('when running gulp-performance-budget', function () {
   it('should emit error on streamed file', function (done) {
@@ -125,8 +116,7 @@ describe('when running gulp-performance-budget', function () {
   }
 
   it('should total up all file sizes to produce a total file size', function (done) {
-    var totalSizePath = './_src/totalFileSize/';
-    var outputFile = './test/json/totalSizeJson.json';
+    var totalSizePath = '_src/totalFileSize/';
     var total = 0;
 
     fs.readdir(totalSizePath, function (err, file) {
@@ -142,11 +132,11 @@ describe('when running gulp-performance-budget', function () {
       }
     });
 
-    gulp.src(totalSizePath + '**/*.*')
-    .pipe(performanceBudget({dest: outputFile}))
+    gulp.src(testTotalSizeSrc)
+    .pipe(performanceBudget({dest: jsonFileTotalSize}))
     .pipe(gulp.dest('dest'))
     .on('end', function(err, data){
-      fs.readFile(outputFile, 'utf-8', function(err, data){
+      fs.readFile(jsonFileTotalSize, 'utf-8', function(err, data){
         if(err) throw (err);
         var dataObj = JSON.parse(data);
         dataObj.should.have.property('totalSize').eql(total);
@@ -156,14 +146,11 @@ describe('when running gulp-performance-budget', function () {
   });
 
   it('should calculate the percentage of each file type', function (done) {
-    var totalSizePath = './_src/totalFileSize/';
-    var outputFile = './test/json/totalSizeJson.json';
-
-    gulp.src(totalSizePath + '**/*.*')
-    .pipe(performanceBudget({dest: outputFile}))
+    gulp.src(testTotalSizeSrc)
+    .pipe(performanceBudget({dest: jsonFileTotalSize}))
     .pipe(gulp.dest('dest'))
     .on('end', function(err, data){
-      fs.readFile(outputFile, 'utf-8', function(err, data){
+      fs.readFile(jsonFileTotalSize, 'utf-8', function(err, data){
         if(err) throw (err);
         var dataObj = JSON.parse(data);
         dataObj.images.should.have.property('percentage').eql(79);
@@ -173,14 +160,11 @@ describe('when running gulp-performance-budget', function () {
   });
 
   it('should calculate a percentage for each file type that all add up to 100', function (done) {
-    var totalSizePath = './_src/totalFileSize/';
-    var outputFile = './test/json/totalSizeJson.json';
-
-    gulp.src(totalSizePath + '**/*.*')
-    .pipe(performanceBudget({dest: outputFile}))
+    gulp.src(testTotalSizeSrc)
+    .pipe(performanceBudget({dest: jsonFileTotalSize}))
     .pipe(gulp.dest('dest'))
     .on('end', function(err, data){
-      fs.readFile(outputFile, 'utf-8', function(err, data){
+      fs.readFile(jsonFileTotalSize, 'utf-8', function(err, data){
         if(err) throw (err);
         var dataObj = JSON.parse(data);
 
