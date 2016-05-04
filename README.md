@@ -2,7 +2,7 @@
 
 A task to produce a json output of the client side assets (file size) used on your website
 
-The task will create an object based on the file extension. 
+The task will create an object based on the file extension.
 
 * All images types will be grouped under the key "image"
 * All font types will be grouped under the key "fonts"
@@ -22,8 +22,8 @@ npm install performance-budget
 ```javascript
 var performanceBudget = require('performance-budget');
 
-gulpTask('default', function(){
-	gulp.src('your-files/**/*')
+gulp.task('default', function(){
+	return gulp.src('your-files/**/*')
     .pipe(performanceBudget())
     .pipe(gulp.dest('dest'));
 });
@@ -137,5 +137,3 @@ performanceBudget('/new-folder/performance-budget.json')
 }
 
 ```
-
-
