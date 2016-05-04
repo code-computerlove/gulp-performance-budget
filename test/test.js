@@ -12,10 +12,12 @@ var testSrc = '_src/**/*';
 var testCSSSrc = '_src/styles/**/*.css';
 var testJSSrc = '_src/scripts/**/*.js';
 var testImageSrc = '_src/images/**/*';
-var jsonFileCSS = './test/json/cssFiles.json';
-var jsonFileJS = './test/json/JSFiles.json';
-var jsonFileImage = './test/json/imageFiles.json';
-var jsonFileAll = './test/json/allFiles.json';
+
+var jsonSrc = './test/json/';
+var jsonFileCSS = jsonSrc + 'cssFiles.json';
+var jsonFileJS = jsonSrc + 'JSFiles.json';
+var jsonFileImage = jsonSrc + 'imageFiles.json';
+var jsonFileAll = jsonSrc + 'allFiles.json';
 
 var filePath = '/_src/';
 
@@ -123,31 +125,26 @@ describe('when running gulp-performance-budget', function () {
   }
 
   it('should total up all file sizes to produce a total file size', function (done) {
-    var totalSizeFile = './_src/totalFileSize/**/*.*';
+    var totalSizePath = './_src/totalFileSize/';
     var outputFile = './test/json/totalSizeJson.json';
-
-    //1266
-
-    var testFilePath = './_src/totalFileSize/';
     var total = 0;
 
-    fs.readdir(testFilePath, function (err, file) {
+    fs.readdir(totalSizePath, function (err, file) {
       if(err) throw err;
 
       for(var index = 0; index < file.length; index++) {
         var fileName = file[index];
 
         if(fileName !== '.DS_Store') {
-          var tempPath = testFilePath + fileName;
+          var tempPath = totalSizePath + fileName;
           total += getFilesizeInBytes(tempPath);
         }
       }
     });
 
-    gulp.src(totalSizeFile)
+    gulp.src(totalSizePath + '**/*.*')
     .pipe(performanceBudget({dest: outputFile}))
     .pipe(gulp.dest('dest'))
-
     .on('end', function(err, data){
       fs.readFile(outputFile, 'utf-8', function(err, data){
         if(err) throw (err);
@@ -156,44 +153,5 @@ describe('when running gulp-performance-budget', function () {
         done();
       })
     });
-
   });
-
-  // it('should calculate the sum of 2 file sizes', function (done) {
-  //   var file1 = './_src/images/images.jpg';
-  //   var file2 = './_src/images/imgres.png';
-  //   var fileSize1, fileSize2;
-  //   var imagesx2 = './imagesx2.json';
-  //
-  //   getFile(file1)
-  //   .then(function(data){
-  //     fileSize1 = parseInt(getCurrentFileSize(data));
-  //     console.log('filesize1', fileSize1);
-  //     return getFile(file2);
-  //   })
-  //   .then(function(data){
-  //     fileSize2 = parseInt(getCurrentFileSize(data));
-  //     console.log('filesize2', fileSize2);
-  //     var expectedResult = fileSize1 + fileSize2;
-  //     return expectedResult;
-  //   })
-  //   .then(function(expectedResult){
-  //     console.log('1: ' + fileSize1 + ' 2: ' + fileSize2);
-  //     var expectedResult = expectedResult;
-  //     console.log('expected', expectedResult);
-  //     gulp.src([file1, file2])
-  //     .pipe(performanceBudget(imagesx2))
-  //     .pipe(gulp.dest('dest'))
-  //     .on('end', function (err, data) {
-  //       fs.readFile(imagesx2, 'utf8', function (err, data) {
-  //         if (err) throw (err);
-  //         var dataObj = JSON.parse(data);
-  //         dataObj.should.have.property('image', expectedResult);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  // });
-
 });
