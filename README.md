@@ -38,8 +38,8 @@ the default location for your json file will be at the root of the current worki
 ```javascript
 var performanceBudget = require('performance-budget');
 
-gulpTask('default', function(){
-	gulp.src('your-files/**/*')
+gulp.task('default', function(){
+	return gulp.src('your-files/**/*')
     .pipe(performanceBudget('/new-folder/performance-budget.json'))
     .pipe(gulp.dest('dest'));
 });
