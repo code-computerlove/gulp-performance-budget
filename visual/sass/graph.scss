@@ -1,0 +1,36 @@
+.performance-budget-graph {
+
+}
+
+.performance-budget-graph__item {
+  margin: 10px 0;
+  color: #FFF;
+  display: table;
+  width: 100%;
+  height: 50px;
+}
+
+.performance-budget-graph__content {
+  margin: 0;
+  width: 20%;
+  background: #5A5E61;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 10px;
+  text-align: right;
+}
+
+.performance-budget-graph__bar {
+  background: #E5E5E5;
+  width: 80%;
+  display: table-cell;
+  position: relative;
+}
+
+.performance-budget-graph__test {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #4679D3;
+}

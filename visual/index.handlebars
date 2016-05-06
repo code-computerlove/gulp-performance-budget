@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Performance budget</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="./main.css">
+	</head>
+
+	<body>
+
+		<header class="header">
+			<div class="section">
+				<h1 class="title">Performance Budget</h1>
+			</div>
+		</header>
+
+		<section class="performance-budget-graph section">
+			<h1 class="title">Performance Budget Graph</h1>
+			{{#each this}}
+				<div class="performance-budget-graph__item clearfix">
+					<div class="performance-budget-graph__content">{{@key}}</div>
+					<div class="performance-budget-graph__bar">
+						<div class="performance-budget-graph__test" style="width:{{percentage}}%;"></div>
+					</div>
+				</div>
+			{{/each}}
+		</section>
+
+		<section class="performance-budget-details section clearfix">
+		  <h1 class="title">Performance budget details</h1>
+		  {{#each this}}
+		    <div class="performance-budget-details__item">
+
+		      <div class="performance-budget-details__header">
+		        <h2>{{@key}}</h2>
+		        <p>{{total}} bytes</p>
+		      </div>
+
+		      <div class="performance-budget-details__content">
+		        {{#each files}}
+		          <div class="performance-budget-details__file">
+		            <p>{{file}}</p>
+		            <p>{{size}} bytes</p>
+		          </div>
+		        {{/each}}
+		      </div>
+		    </div>
+		  {{/each}}
+		</section>
+
+	</body>
+
+</html>
+
+
+
+	<!--
+
+  <section class="performance-budget">
+    <h1 class="performance-budget__title">Performance Budget</h1>
+
+  <div class="performance-budget-graph">
+
+    {{#each this}}
+      <div class="performance-budget-graph__item">
+        <div class="performance-budget-graph__content">{{@key}}</div>
+        <div class="performance-budget-graph__bar">
+          <div class="performance-budget-graph__test" style="width:{{percentage}}%;"></div>
+        </div>
+      </div>
+    {{/each}}
+
+  </div>
+  </section>
+
+
+
+
+
+
+
+
+<style>
+
+h1, h2, p {
+  margin: 0;
+}
+
+.performance-budget {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.performance-budget:after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+.performance-budget__title {
+  margin: 0;
+  font-size: 40px;
+}
+
+.performance-budget__graph {
+
+}
+
+.performance-budget__graph__item {
+  margin: 10px 0;
+  color: #FFF;
+  display: table;
+  width: 100%;
+  height: 50px;
+}
+
+.performance-budget__graph__item:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.performance-budget__graph__content {
+  margin: 0;
+  width: 20%;
+  background: red;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0 10px;
+}
+
+.performance-budget__graph__bar {
+  background: green;
+  width: 80%;
+  display: table-cell;
+  position: relative;
+}
+
+.performance-budget__graph__test {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: red;
+  mix-blend-mode: difference;
+}
+</style>
+
+<section class="performance-budget">
+  <h1 class="performance-budget__title">Performance Budget</h1>
+
+  <div class="performance-budget__graph">
+
+    {{#each this}}
+      <div class="performance-budget__graph__item">
+        <div class="performance-budget__graph__content">{{@key}}</div>
+        <div class="performance-budget__graph__bar">
+          <div class="performance-budget__graph__test" style="width:{{percentage}}%;"></div>
+        </div>
+      </div>
+    {{/each}}
+
+  </div>
+</section>
+
+
+<style>
+
+.performance-budget-details {
+  background: tomato;
+}
+
+.performance-budget-details:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.performance-budget-details__item {
+  width: 50%;
+  display: inline-block;
+  float: left;
+  background: yellow;
+  padding: 20px 0;
+  border-top: 5px solid;
+  border-bottom: 5px solid;
+}
+
+</style>
+
+<section class="performance-budget-details">
+  <h1>Performance budget details</h1>
+  {{#each this}}
+    <div class="performance-budget-details__item">
+
+      <div class="performance-budget-details__header">
+        <h2>{{@key}}</h2>
+        <p>{{total}} bytes</p>
+      </div>
+
+      <div class="performance-budget-details__content">
+        {{#each files}}
+          <div class="performance-budget-details__file">
+            <p>{{file}}</p>
+            <p>{{size}} bytes</p>
+          </div>
+        {{/each}}
+      </div>
+
+    </div>
+  {{/each}}
+</section>
+-->

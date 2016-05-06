@@ -94,7 +94,7 @@ describe('when running gulp-performance-budget', function () {
 
   it('should create a value for fonts if svg is a font', function(done){
     var fontFile = './_src/fonts/gt-pressura-mono-regular-webfont.svg';
-    var outputFile = './test/json/svgFontJson.json';
+    var outputFile = './test/json/svgFont.json';
 
     gulp.src(fontFile)
     .pipe(performanceBudget({dest: outputFile}))
@@ -186,13 +186,29 @@ describe('when running gulp-performance-budget', function () {
       .pipe(performanceBudget({dest: jsonFileAll, budget: 3000}))
       .pipe(gulp.dest('dest'))
       .on('end', function (err, data) {
-       var _self = this;
-        fs.readFile(jsonFileAll, 'utf8', function (err, data) {
-          if (err) throw (err);
-          var dataObj = JSON.parse(data);
-          dataObj.budget.should.eql(3000);
-          done();
-        });
+      fs.readFile(jsonFileAll, 'utf8', function (err, data) {
+        if (err) throw (err);
+        var dataObj = JSON.parse(data);
+        dataObj.budget.should.eql(3000);
+        done();
+      });
+    });
+  });
+
+  it('should allow a user to pass through a budget which is added to the json file', function (done) {
+    gulp.src(testTotalSizeSrc)
+      .pipe(performanceBudget({dest: jsonFileTotalSize, budget: 3000}))
+      .pipe(gulp.dest('dest'))
+      .on('end', function (err, data) {
+      fs.readFile(jsonFileTotalSize, 'utf8', function (err, data) {
+        if (err) throw (err);
+        var dataObj = JSON.parse(data);
+
+        var remainingBudget = dataObj.budget - dataObj.totalSize;
+
+        dataObj.remainingBudget.should.eql(remainingBudget);
+        done();
+      });
     });
   });
 });

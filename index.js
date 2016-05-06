@@ -135,9 +135,12 @@ function performanceBudget (options) {
       options.budget = 5000;
     }
 
-    if (perfObj.budget === undefined) {
-      perfObj['budget'] = options.budget;
-    }
+    if (perfObj.budget !== undefined) return;
+    perfObj['budget'] = options.budget;
+  }
+
+  function addRemainingBudgetToJsonFile () {
+    perfObj['remainingBudget'] = perfObj.budget - perfObj.totalSize;
   }
 
   function generate (file, enc, cb) {
@@ -161,6 +164,9 @@ function performanceBudget (options) {
     buildPerfObjects(getFileExtension(file), file);
     pushTotalFileSizeToJson();
     calculatePercentageForEachFileType();
+
+    addRemainingBudgetToJsonFile();
+
     writeToFile();
 
     cb();
