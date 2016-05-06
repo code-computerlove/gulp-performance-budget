@@ -19,7 +19,7 @@ var jsonFileCSS = jsonSrc + 'cssFiles.json';
 var jsonFileJS = jsonSrc + 'JSFiles.json';
 var jsonFileImage = jsonSrc + 'imageFiles.json';
 var jsonFileAll = jsonSrc + 'allFiles.json';
-var jsonFileTotalSize = jsonSrc + 'totalSizeJson.json';
+var jsonFileTotalSize = jsonSrc + 'totalSize.json';
 
 describe('when running gulp-performance-budget', function () {
   it('should emit error on streamed file', function (done) {
@@ -53,7 +53,7 @@ describe('when running gulp-performance-budget', function () {
         fs.readFile(jsonFileCSS, 'utf8', function (err, data) {
           if (err) throw (err);
           var dataObj = JSON.parse(data);
-          dataObj.should.have.property('css');
+          dataObj.fileTypes.should.have.property('css');
           done();
         });
       });
@@ -67,7 +67,7 @@ describe('when running gulp-performance-budget', function () {
         fs.readFile(jsonFileImage, 'utf8', function (err, data) {
           if (err) throw (err);
           var dataObj = JSON.parse(data);
-          dataObj.should.have.property('images');
+          dataObj.fileTypes.should.have.property('images');
           done();
         });
       });
@@ -83,8 +83,8 @@ describe('when running gulp-performance-budget', function () {
           if (err) throw (err);
           var dataObj = JSON.parse(data);
           var cssVal = 0;
-          if(dataObj.hasOwnProperty(ext)){
-            cssVal = parseInt(dataObj[ext].total);
+          if(dataObj.fileTypes.hasOwnProperty(ext)){
+            cssVal = parseInt(dataObj.fileTypes[ext].total);
           }
           cssVal.should.be.greaterThan(0);
           done();
@@ -103,7 +103,7 @@ describe('when running gulp-performance-budget', function () {
       fs.readFile(outputFile, 'utf-8', function(err, data){
         if(err) throw (err);
         var dataObj = JSON.parse(data);
-        dataObj.should.have.property('fonts');
+        dataObj.fileTypes.should.have.property('fonts');
         done();
       })
     });
@@ -153,7 +153,7 @@ describe('when running gulp-performance-budget', function () {
       fs.readFile(jsonFileTotalSize, 'utf-8', function(err, data){
         if(err) throw (err);
         var dataObj = JSON.parse(data);
-        dataObj.images.should.have.property('percentage').eql(79);
+        dataObj.fileTypes.images.should.have.property('percentage').eql(79);
         done();
       })
     });
@@ -168,9 +168,9 @@ describe('when running gulp-performance-budget', function () {
         if(err) throw (err);
         var dataObj = JSON.parse(data);
 
-        var imagesPercentage = dataObj.images.percentage;
-        var cssPercentage = dataObj.css.percentage;
-        var jsPercentage = dataObj.js.percentage;
+        var imagesPercentage = dataObj.fileTypes.images.percentage;
+        var cssPercentage = dataObj.fileTypes.css.percentage;
+        var jsPercentage = dataObj.fileTypes.js.percentage;
 
         var sumOfPercentage = imagesPercentage + cssPercentage + jsPercentage;
 
