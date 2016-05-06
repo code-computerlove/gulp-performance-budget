@@ -40,7 +40,7 @@ var performanceBudget = require('performance-budget');
 
 gulp.task('default', function(){
 	return gulp.src('your-files/**/*')
-    .pipe(performanceBudget('/new-folder/performance-budget.json'))
+    .pipe(performanceBudget('/new-folder/performance-budget.json', 100000))
     .pipe(gulp.dest('dest'));
 });
 
@@ -48,92 +48,120 @@ gulp.task('default', function(){
 
 ###Options
 
-For a differnt file location; pass the location as a parameter into performanceBudget
+For a different file location pass the location as a parameter into performanceBudget.
 
 ```javascript
 performanceBudget('/new-folder/performance-budget.json')
+```
+
+To define a personal budget you can pass the max file size as a parameter into performanceBudget.
+The file size input has to be a number and in bytes. If no file size is passed through it will
+default to 1400000 (1.4Mb).
+
+```javascript
+performanceBudget(100000)
 ```
 
 ###Example of output
 
 ```json
 {
-  "fonts": {
-    "total": 241,
-    "files": [
-      {
-        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.svg",
-        "size": 98
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.ttf",
-        "size": 61
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff",
-        "size": 30
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff2",
-        "size": 23
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/fonts/gt-pressura-regular-webfont.eot",
-        "size": 29
-      }
-    ]
+  "fileTypes": {
+    "fonts": {
+      "total": 241,
+      "files": [
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.svg",
+          "size": 98
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.ttf",
+          "size": 61
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff",
+          "size": 30
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff2",
+          "size": 23
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-regular-webfont.eot",
+          "size": 29
+        }
+      ],
+      "percentage": 6
+    },
+    "images": {
+      "total": 2924,
+      "files": [
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/images/cl-logo.svg",
+          "size": 906
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/images/images.jpg",
+          "size": 12
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/images/imgres-1.png",
+          "size": 1002
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/images/imgres.png",
+          "size": 2
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/imgres-1.png",
+          "size": 1002
+        }
+      ],
+      "percentage": 79
+    },
+    "js": {
+      "total": 414,
+      "files": [
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/scripts/test.js",
+          "size": 207
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/test.js",
+          "size": 207
+        }
+      ],
+      "percentage": 11
+    },
+    "css": {
+      "total": 142,
+      "files": [
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/styles/info.css",
+          "size": 57
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/styles/other.css",
+          "size": 0
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/styles/other2.css",
+          "size": 0
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/styles/test.css",
+          "size": 28
+        },
+        {
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/info.css",
+          "size": 57
+        }
+      ],
+      "percentage": 4
+    }
   },
-  "images": {
-    "total": 1922,
-    "files": [
-      {
-        "file": "/Sites/gulp-performance-budget/_src/images/cl-logo.svg",
-        "size": 906
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/images/images.jpg",
-        "size": 12
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/images/imgres-1.png",
-        "size": 1002
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/images/imgres.png",
-        "size": 2
-      }
-    ]
-  },
-  "js": {
-    "total": 207,
-    "files": [
-      {
-        "file": "/Sites/gulp-performance-budget/_src/scripts/test.js",
-        "size": 207
-      }
-    ]
-  },
-  "css": {
-    "total": 85,
-    "files": [
-      {
-        "file": "/Sites/gulp-performance-budget/_src/styles/info.css",
-        "size": 57
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/styles/other.css",
-        "size": 0
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/styles/other2.css",
-        "size": 0
-      },
-      {
-        "file": "/Sites/gulp-performance-budget/_src/styles/test.css",
-        "size": 28
-      }
-    ]
-  }
+  "budget": 3000,
+  "totalSize": 3721,
+  "remainingBudget": -721
 }
-
 ```
