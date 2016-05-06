@@ -181,4 +181,18 @@ describe('when running gulp-performance-budget', function () {
     });
   });
 
+  it('should allow a user to pass through a budget which is added to the json file', function (done) {
+    gulp.src(testSrc)
+      .pipe(performanceBudget({dest: jsonFileAll, budget: 3000}))
+      .pipe(gulp.dest('dest'))
+      .on('end', function (err, data) {
+       var _self = this;
+        fs.readFile(jsonFileAll, 'utf8', function (err, data) {
+          if (err) throw (err);
+          var dataObj = JSON.parse(data);
+          dataObj.budget.should.eql(3000);
+          done();
+        });
+    });
+  });
 });
