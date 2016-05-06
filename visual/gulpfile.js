@@ -2,19 +2,9 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var handlebars = require('gulp-compile-handlebars');
 var rename = require('gulp-rename');
+var data = require('../test/json/totalSize.json');
 
-var context = {
-  author: {firstName: "Alan", lastName: "Johnson"},
-  body: "I Love Handlebars",
-  comments: [{
-    author: {firstName: "Yehuda", lastName: "Katz"},
-    body: "Me too!"
-  }]
-};
-
-var data = require('./test/json/totalSize.json');
-
-gulp.task('html', function () {
+gulp.task('handlebars', function () {
 	var templateData = data,
 	options = {}
 
@@ -24,10 +14,13 @@ gulp.task('html', function () {
 		.pipe(gulp.dest('dist'));
 });
 
-gulp.task('sass', function () {
+gulp.task('styles', function () {
   return gulp.src('./sass/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['html', 'sass']);
+gulp.task('default', ['handlebars', 'styles'], function (cb) {
+  gulp.watch('./index.handlebars', ['handlebars']),
+  gulp.watch('./sass/*.scss', ['styles'])
+});

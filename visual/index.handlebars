@@ -16,7 +16,7 @@
 
 		<section class="performance-budget-graph section">
 			<h1 class="title">Performance Budget Graph</h1>
-			{{#each this}}
+			{{#each fileTypes}}
 				<div class="performance-budget-graph__item clearfix">
 					<div class="performance-budget-graph__content">{{@key}}</div>
 					<div class="performance-budget-graph__bar">
@@ -26,24 +26,32 @@
 			{{/each}}
 		</section>
 
-		<section class="performance-budget-details section clearfix">
+		<section class="performance-budget-cards section clearfix">
 		  <h1 class="title">Performance budget details</h1>
-		  {{#each this}}
-		    <div class="performance-budget-details__item">
+		  {{#each fileTypes}}
+		    <div class="performance-budget-cards__item">
 
-		      <div class="performance-budget-details__header">
+		      <div class="performance-budget-cards__header">
 		        <h2>{{@key}}</h2>
-		        <p>{{total}} bytes</p>
 		      </div>
 
-		      <div class="performance-budget-details__content">
+					<div class="performance-budget-cards__bar">
+						<div class="performance-budget-cards__bar-inner" style="width:{{percentage}}%;"></div>
+					</div>
+
+					<div class="performance-budget-cards__stats">
+						<p>{{percentage}}%</p>
+						<p>{{total}} bytes</p>
+					</div>
+
+		      <ul class="performance-budget-cards__file-list">
 		        {{#each files}}
-		          <div class="performance-budget-details__file">
+		          <li class="performance-budget-cards__file">
 		            <p>{{file}}</p>
 		            <p>{{size}} bytes</p>
-		          </div>
+		          </li>
 		        {{/each}}
-		      </div>
+		      </ul>
 		    </div>
 		  {{/each}}
 		</section>

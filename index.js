@@ -23,6 +23,7 @@ var svg = 'svg';
 var totalFileSize;
 
 var defaultBudget = 1400000;
+var defaultFilePath = './performanceBudget.json';
 
 // Consts
 const PLUGIN_NAME = 'performance-budget';
@@ -34,6 +35,12 @@ function performanceBudget (options) {
   perfObj['fileTypes'] = {};
   totalFileSize = 0;
   var options = extend({}, options);
+
+  function checkIfDestIsDefined () {
+    if(options.dest === undefined) {
+      options.dest = defaultFilePath;
+    }
+  }
 
   function getPath (fullPath) {
     return fullPath.substring(0, fullPath.lastIndexOf("/")+1);
@@ -158,6 +165,8 @@ function performanceBudget (options) {
     };
 
     currentFile = file;
+
+    checkIfDestIsDefined();
 
     // TODO these need promises to avoid race conditions;
     addBudgetToJsonFile();

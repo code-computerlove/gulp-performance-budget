@@ -211,4 +211,18 @@ describe('when running gulp-performance-budget', function () {
       });
     });
   });
+
+  it('should not error when no string is passed', function (done) {
+    gulp.src(testTotalSizeSrc)
+      .pipe(performanceBudget())
+      .pipe(gulp.dest('dest'))
+      .on('end', function (err, data) {
+      fs.readFile(jsonFileTotalSize, 'utf8', function (err, data) {
+        if (err) throw (err);
+        var dataObj = JSON.parse(data);
+        data.length.should.be.above(0);
+        done();
+      });
+    });
+  });
 });

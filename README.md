@@ -40,7 +40,7 @@ var performanceBudget = require('performance-budget');
 
 gulp.task('default', function(){
 	return gulp.src('your-files/**/*')
-    .pipe(performanceBudget('/new-folder/performance-budget.json', 100000))
+    .pipe(performanceBudget({dest: 'pathToJson', budget: 3000}))
     .pipe(gulp.dest('dest'));
 });
 
@@ -51,7 +51,7 @@ gulp.task('default', function(){
 For a different file location pass the location as a parameter into performanceBudget.
 
 ```javascript
-performanceBudget('/new-folder/performance-budget.json')
+performanceBudget({dest: '/new-folder/performance-budget.json'})
 ```
 
 To define a personal budget you can pass the max file size as a parameter into performanceBudget.
@@ -59,7 +59,7 @@ The file size input has to be a number and in bytes. If no file size is passed t
 default to 1400000 (1.4Mb).
 
 ```javascript
-performanceBudget(100000)
+performanceBudget({budget: 100000})
 ```
 
 ###Example of output
