@@ -139,7 +139,7 @@ describe('when running gulp-performance-budget', function () {
       fs.readFile(jsonFileTotalSize, 'utf-8', function(err, data){
         if(err) throw (err);
         var dataObj = JSON.parse(data);
-        dataObj.should.have.property('totalSize').eql(total);
+        dataObj.totalSizes.should.have.property('totalSize').eql(total);
         done();
       })
     });
@@ -197,16 +197,16 @@ describe('when running gulp-performance-budget', function () {
 
   it('should allow a user to pass through a budget which is added to the json file', function (done) {
     gulp.src(testTotalSizeSrc)
-      .pipe(performanceBudget({dest: jsonFileTotalSize, budget: {total: 3000}}))
+      .pipe(performanceBudget({dest: jsonFileTotalSize, budget: {total: 9000}}))
       .pipe(gulp.dest('dest'))
       .on('end', function (err, data) {
       fs.readFile(jsonFileTotalSize, 'utf8', function (err, data) {
         if (err) throw (err);
         var dataObj = JSON.parse(data);
 
-        var remainingBudget = dataObj.budget.total - dataObj.totalSize;
+        var remainingBudget = dataObj.budget.total - dataObj.totalSizes.totalSize;
 
-        dataObj.remainingBudget.should.eql(remainingBudget);
+        dataObj.remainingBudget.total.should.eql(remainingBudget);
         done();
       });
     });

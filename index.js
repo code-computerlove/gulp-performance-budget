@@ -21,6 +21,10 @@ var fonts = 'fonts';
 var svg = 'svg';
 
 var totalFileSize;
+var cssFileSize;
+var imagesFileSize;
+var jsFileSize;
+var fontsFileSize;
 
 var defaultTotalBudget = 1400000;
 var defaultCssBudget = 300;
@@ -38,6 +42,10 @@ function performanceBudget (options) {
   perfObj = {};
   perfObj['fileTypes'] = {};
   totalFileSize = 0;
+  var cssFileSize = 0;
+  var imagesFileSize = 0;
+  var jsFileSize = 0;
+  var fontsFileSize = 0;
   var options = extend({}, options);
 
   function checkIfDestIsDefined () {
@@ -94,6 +102,19 @@ function performanceBudget (options) {
     }
     perfObj.fileTypes[extname].files.push({file: currentFile.path, size: fileSize});
 
+    if(extname === 'css') {
+      cssFileSize += fileSize;
+    }
+    if(extname === 'images') {
+      imagesFileSize += fileSize;
+    }
+    if(extname === 'js') {
+      jsFileSize += fileSize;
+    }
+    if(extname === 'fonts') {
+      fontsFileSize += fileSize;
+    }
+
   }
 
   function whichSvg (extname, type) {
@@ -133,12 +154,17 @@ function performanceBudget (options) {
   }
 
   function pushTotalFileSizeToJson () {
-    perfObj['totalSize'] = totalFileSize;
+    perfObj.totalSizes = {};
+    perfObj.totalSizes.totalSize = totalFileSize;
+    perfObj.totalSizes.css = cssFileSize;
+    perfObj.totalSizes.images = imagesFileSize;
+    perfObj.totalSizes.js = jsFileSize;
+    perfObj.totalSizes.fonts = fontsFileSize;
   }
 
   function calculatePercentageForEachFileType () {
     for(var item in perfObj.fileTypes) {
-      var percentage = Math.round((perfObj.fileTypes[item].total / perfObj.totalSize) * 100);
+      var percentage = Math.round((perfObj.fileTypes[item].total / perfObj.totalSizes.totalSize) * 100);
       perfObj.fileTypes[item]['percentage'] = percentage;
     } 
   }
@@ -176,7 +202,12 @@ function performanceBudget (options) {
   }
 
   function addRemainingBudgetToJsonFile () {
-    perfObj['remainingBudget'] = perfObj.budget.total - perfObj.totalSize;
+    perfObj.remainingBudget = {};
+    perfObj.remainingBudget.total = perfObj.budget.total - perfObj.totalSizes.totalSize;
+    perfObj.remainingBudget.css = perfObj.budget.css - perfObj.totalSizes.css;
+    perfObj.remainingBudget.images = perfObj.budget.images - perfObj.totalSizes.images;
+    perfObj.remainingBudget.js = perfObj.budget.js - perfObj.totalSizes.js;
+    perfObj.remainingBudget.fonts = perfObj.budget.fonts - perfObj.totalSizes.fonts;
   }
 
   function generate (file, enc, cb) {

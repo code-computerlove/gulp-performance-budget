@@ -38,6 +38,18 @@
     "js": 400,
     "fonts": 200
   },
-  "totalSize": 1266,
-  "remainingBudget": 7734
+  "totalSizes": {
+    "totalSize": 1266,
+    "css": 57,
+    "images": 1002,
+    "js": 207,
+    "fonts": 0
+  },
+  "remainingBudget": {
+    "total": 7734,
+    "css": 1943,
+    "images": -602,
+    "js": 193,
+    "fonts": 200
+  }
 }
