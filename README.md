@@ -167,7 +167,13 @@ performanceBudget({budget: {
       "percentage": 4
     }
   },
-  "budget": 3000,
+  "budget": {
+    "total": 9000,
+    "css": 2000,
+    "images": 400,
+    "js": 400,
+    "fonts": 200
+  },
   "totalSize": 3721,
   "remainingBudget": -721
 }
