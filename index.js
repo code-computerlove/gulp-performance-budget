@@ -136,20 +136,20 @@ function performanceBudget (options) {
     for(var item in perfObj.fileTypes) {
       var percentage = Math.round((perfObj.fileTypes[item].total / perfObj.totalSize) * 100);
       perfObj.fileTypes[item]['percentage'] = percentage;
-    }
+    } 
   }
 
   function addBudgetToJsonFile () {
-    if (options.budget === undefined) {
-      options.budget = defaultBudget;
+    if (options.totalBudget === undefined) {
+      options.totalBudget = defaultBudget;
     }
 
-    if (perfObj.budget !== undefined) return;
-    perfObj['budget'] = options.budget;
-  }
+    if (perfObj.totalBudget !== undefined) return;
+      perfObj['totalBudget'] = options.totalBudget;
+    }
 
   function addRemainingBudgetToJsonFile () {
-    perfObj['remainingBudget'] = perfObj.budget - perfObj.totalSize;
+    perfObj['remainingBudget'] = perfObj.totalBudget - perfObj.totalSize;
   }
 
   function generate (file, enc, cb) {
