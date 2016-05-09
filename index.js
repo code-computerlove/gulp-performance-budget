@@ -22,7 +22,11 @@ var svg = 'svg';
 
 var totalFileSize;
 
-var defaultBudget = 1400000;
+var defaultTotalBudget = 1400000;
+var defaultCssBudget = 300;
+var defaultImagesBudget = 600;
+var defaultJsBudget = 200;
+var defaultFontsBudget = 300;
 var defaultFilePath = './performanceBudget.json';
 
 // Consts
@@ -140,16 +144,39 @@ function performanceBudget (options) {
   }
 
   function addBudgetToJsonFile () {
-    if (options.totalBudget === undefined) {
-      options.totalBudget = defaultBudget;
+    if (options.budget === undefined) {
+      options.budget = {};
+    }
+    if (options.budget.total === undefined) {
+      options.budget.total = defaultTotalBudget;
+    }
+    if (options.budget.css === undefined) {
+      options.budget.css = defaultCssBudget;
+    }
+    if (options.budget.images === undefined) {
+      options.budget.images = defaultImagesBudget;
+    }
+    if (options.budget.js === undefined) {
+      options.budget.js = defaultJsBudget;
+    }
+    if (options.budget.fonts === undefined) {
+      options.budget.fonts = defaultFontsBudget;
     }
 
-    if (perfObj.totalBudget !== undefined) return;
-      perfObj['totalBudget'] = options.totalBudget;
+    if ((options.budget.css + options.budget.images + options.budget.js + options.budget.fonts) > options.budget.total) {
+      // TODO better error message
+      throw new Error("The total budget size of the broken down assets is larger than the total budget");
     }
+
+    if (perfObj.budget !== undefined) {
+      return;
+    } else {
+      perfObj['budget'] = options.budget;
+    }
+  }
 
   function addRemainingBudgetToJsonFile () {
-    perfObj['remainingBudget'] = perfObj.totalBudget - perfObj.totalSize;
+    perfObj['remainingBudget'] = perfObj.budget.total - perfObj.totalSize;
   }
 
   function generate (file, enc, cb) {

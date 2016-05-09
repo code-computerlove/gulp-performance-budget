@@ -31,7 +31,13 @@
       "percentage": 16
     }
   },
-  "totalBudget": 1400000,
+  "budget": {
+    "total": 9000,
+    "css": 2000,
+    "images": 400,
+    "js": 400,
+    "fonts": 200
+  },
   "totalSize": 1266,
-  "remainingBudget": 1398734
+  "remainingBudget": 7734
 }
