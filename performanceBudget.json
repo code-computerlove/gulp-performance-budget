@@ -4,7 +4,7 @@
       "total": 1002,
       "files": [
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/imgres-1.png",
+          "file": "/Users/JamesTudsbury/Documents/projects/performance-budget/_src/totalFileSize/imgres-1.png",
           "size": 1002
         }
       ],
@@ -14,7 +14,7 @@
       "total": 57,
       "files": [
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/info.css",
+          "file": "/Users/JamesTudsbury/Documents/projects/performance-budget/_src/totalFileSize/info.css",
           "size": 57
         }
       ],
@@ -24,14 +24,32 @@
       "total": 207,
       "files": [
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/test.js",
+          "file": "/Users/JamesTudsbury/Documents/projects/performance-budget/_src/totalFileSize/test.js",
           "size": 207
         }
       ],
       "percentage": 16
     }
   },
-  "budget": 1400000,
-  "totalSize": 1266,
-  "remainingBudget": 1398734
+  "budget": {
+    "total": 9000,
+    "css": 2000,
+    "images": 400,
+    "js": 400,
+    "fonts": 200
+  },
+  "totalSizes": {
+    "totalSize": 1266,
+    "css": 57,
+    "images": 1002,
+    "js": 207,
+    "fonts": 0
+  },
+  "remainingBudget": {
+    "total": 7734,
+    "css": 1943,
+    "images": -602,
+    "js": 193,
+    "fonts": 200
+  }
 }

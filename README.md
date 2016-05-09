@@ -54,12 +54,19 @@ For a different file location pass the location as a parameter into performanceB
 performanceBudget({dest: '/new-folder/performance-budget.json'})
 ```
 
-To define a personal budget you can pass the max file size as a parameter into performanceBudget.
+To define a personal budget for the total budget, or broken down based on file type, or both, you can pass the max file size as a parameter into performanceBudget.
 The file size input has to be a number and in bytes. If no file size is passed through it will
 default to 1400000 (1.4Mb).
 
 ```javascript
-performanceBudget({budget: 100000})
+performanceBudget({budget: {
+  'total': 9000,
+  'css': 2000,
+  'images': 400,
+  'js': 400,
+  'fonts': 200
+  }
+})
 ```
 
 ###Example of output
@@ -160,7 +167,13 @@ performanceBudget({budget: 100000})
       "percentage": 4
     }
   },
-  "budget": 3000,
+  "budget": {
+    "total": 9000,
+    "css": 2000,
+    "images": 400,
+    "js": 400,
+    "fonts": 200
+  },
   "totalSize": 3721,
   "remainingBudget": -721
 }
