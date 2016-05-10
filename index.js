@@ -119,7 +119,7 @@ function performanceBudget (options) {
     }
 
     //fonts
-    if((/(woff|woff2|eot|ttf)$/i).test(extRef)){
+    if((/(woff|woff2|eot|ttf|otf)$/i).test(extRef)){
       extRef = fonts;
     }
     if(extRef === svg && whichSvg(extRef, fonts)){
