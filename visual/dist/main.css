@@ -1,50 +1,157 @@
 body {
-  margin: 0; }
-
-h1, h2, p {
-  margin: 0; }
+  margin: 0;
+  color: #EAE7E2; }
 
 .section {
   width: 90%;
   margin: 0 auto; }
-
-.title {
-  color: #5A5E61; }
 
 .clearfix:after {
   content: '';
   display: table;
   clear: both; }
 
-.header {
-  background: #4679D3;
-  padding: 20px 0; }
+.is-hidden {
+  display: none; }
 
-.performance-budget-graph__item {
-  margin: 10px 0;
-  color: #FFF;
+p {
+  margin: 0; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+li {
+  list-style-type: none; }
+
+a {
+  text-decoration: none; }
+
+.styleguide {
+  text-align: center; }
+
+.colour {
+  width: 20%;
+  margin: 10px 2%;
+  padding: 20px 0;
+  display: inline-block;
+  border: 2px solid #302E2F;
+  color: #EAE7E2; }
+
+.white {
+  background-color: #EAE7E2;
+  color: #302E2F; }
+
+.black {
+  background-color: #302E2F; }
+
+.blue {
+  background-color: #648D93; }
+
+.red {
+  background-color: #A9564E; }
+
+.chart {
+  background: linear-gradient(to bottom, #302E2F 60%, #EAE7E2 40%);
+  padding: 40px 0; }
+
+.chart__item {
+  max-width: 800px;
+  display: block;
+  margin: 0 auto; }
+
+.performance-budget-key {
+  margin: 40px auto 0; }
+
+.performance-budget-key__list {
+  display: table;
+  width: 40%; }
+
+.performance-budget-key__list__item {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  width: 10%;
+  background-color: #648D93;
+  border: 1px solid #EAE7E2; }
+
+.performance-budget-key__list__item--active {
+  background-color: #302E2F; }
+
+.performance-budget-key__link {
+  color: #EAE7E2;
+  padding: 20px 0;
+  display: block; }
+
+.performance-budget-details__item {
+  background-color: #648D93;
+  border-left: 1px solid #EAE7E2;
+  border-right: 1px solid #EAE7E2; }
+
+.performance-budget-details__bar {
+  height: 10px;
+  background-color: #302E2F; }
+
+.performance-budget-details__container {
+  width: 100%;
+  display: table;
+  border-top: 1px solid #EAE7E2; }
+
+.performance-budget-details__stats {
+  background-color: #302E2F;
+  width: 30%;
+  height: 100px;
+  display: table-cell; }
+
+.performance-budget-details__stats__item {
   display: table;
   width: 100%;
-  height: 50px; }
-
-.performance-budget-graph__content {
-  margin: 0;
-  width: 20%;
-  background: #5A5E61;
-  display: table-cell;
+  text-align: center;
   vertical-align: middle;
-  padding: 0 10px;
-  text-align: right; }
+  height: 100px;
+  background-color: #A9564E; }
+  .performance-budget-details__stats__item:last-child {
+    background-color: #302E2F; }
+
+.performance-budget-details__stats__text {
+  display: table-cell;
+  vertical-align: middle; }
+
+.performance-budget-details__file-list {
+  background-color: #648D93;
+  display: table-cell;
+  vertical-align: top;
+  padding: 20px; }
+
+.performance-budget-details__file {
+  width: 100%;
+  display: table;
+  padding: 5px 0; }
+
+.performance-budget-details__file-path {
+  display: table-cell;
+  width: 80%;
+  vertical-align: middle; }
+
+.performance-budget-details__file-size {
+  display: table-cell;
+  width: 20%;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 5px; }
+
+.performance-budget-graph {
+  display: table; }
 
 .performance-budget-graph__bar {
-  background: #E5E5E5;
-  width: 80%;
+  height: 50px;
   display: table-cell;
-  position: relative; }
-
-.performance-budget-graph__test {
-  position: absolute;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: #4679D3; }
+  background-color: #648D93;
+  border: 1px solid #EAE7E2;
+  color: #EAE7E2;
+  vertical-align: middle;
+  text-align: center; }
+  .performance-budget-graph__bar:nth-child(2n) {
+    background-color: #302E2F; }
+  .performance-budget-graph__bar:nth-child(3n) {
+    background-color: #A9564E; }

@@ -1,36 +1,21 @@
 .performance-budget-graph {
-
-}
-
-.performance-budget-graph__item {
-  margin: 10px 0;
-  color: #FFF;
   display: table;
-  width: 100%;
-  height: 50px;
-}
-
-.performance-budget-graph__content {
-  margin: 0;
-  width: 20%;
-  background: #5A5E61;
-  display: table-cell;
-  vertical-align: middle;
-  padding: 0 10px;
-  text-align: right;
 }
 
 .performance-budget-graph__bar {
-  background: #E5E5E5;
-  width: 80%;
+  height: 50px;
   display: table-cell;
-  position: relative;
-}
+  background-color: #648D93;
+  border: 1px solid #EAE7E2;
+  color: #EAE7E2;
+  vertical-align: middle;
+  text-align: center;
+  
+  &:nth-child(2n) {
+    background-color: #302E2F;
+  }
 
-.performance-budget-graph__test {
-  position: absolute;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: #4679D3;
+  &:nth-child(3n) {
+    background-color: #A9564E;
+  }
 }

@@ -1,14 +1,13 @@
 # performance-budget
 
-A task to produce a json output of the client side assets (file size) used on your website
+A task to produce a json output of the client side assets (file size) used on your website.
 
 The task will create an object based on the file extension.
 
 * All images types will be grouped under the key "image"
 * All font types will be grouped under the key "fonts"
 
-SVG's are determined based on the "font-face" attribute being present. If not present it will be grouped under the images key
-
+SVG's are determined based on the "font-face" attribute being present. If not present it will be grouped under the images key.
 
 ###Usage
 
@@ -19,6 +18,7 @@ npm install performance-budget
 ```
 
 ###Basic setup using (gulp)
+
 ```javascript
 var performanceBudget = require('performance-budget');
 
@@ -27,11 +27,9 @@ gulp.task('default', function(){
     .pipe(performanceBudget())
     .pipe(gulp.dest('dest'));
 });
-
 ```
-The dest is just a placeholder and has no influence on where your output is saved.
 
-the default location for your json file will be at the root of the current working directory.
+The dest is just a placeholder and has no influence on where your output is saved, the location can be defined in the options which is described below. If this is not defined the default location for your JSON file will be at the root of the current working directory.
 
 ###Specific location (using gulp)
 
@@ -43,7 +41,6 @@ gulp.task('default', function(){
     .pipe(performanceBudget({dest: 'pathToJson', budget: 3000}))
     .pipe(gulp.dest('dest'));
 });
-
 ```
 
 ###Options

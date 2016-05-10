@@ -1,23 +1,38 @@
+//Base Styles
+
 body {
   margin: 0;
-}
-
-h1, h2, p {
-  margin: 0;
+  color: $c-white;
 }
 
 .section {
   width: 90%;
   margin: 0 auto;
-  // color: #FFF;
-}
-
-.title {
-  color: #5A5E61;
 }
 
 .clearfix:after {
   content: '';
   display: table;
   clear: both;
+}
+
+.is-hidden {
+  display: none;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
 }

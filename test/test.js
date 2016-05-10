@@ -21,6 +21,12 @@ var jsonFileImage = jsonSrc + 'imageFiles.json';
 var jsonFileAll = jsonSrc + 'allFiles.json';
 var jsonFileTotalSize = jsonSrc + 'totalSize.json';
 
+function getFilesizeInBytes(filename) {
+ var stats = fs.statSync(filename);
+ var fileSizeInBytes = stats["size"];
+ return fileSizeInBytes;
+};
+
 describe('when running gulp-performance-budget', function () {
   it('should emit error on streamed file', function (done) {
     gulp.src(testSrc, { buffer: false })
@@ -108,12 +114,6 @@ describe('when running gulp-performance-budget', function () {
       })
     });
   });
-
-  function getFilesizeInBytes(filename) {
-   var stats = fs.statSync(filename)
-   var fileSizeInBytes = stats["size"]
-   return fileSizeInBytes
-  }
 
   it('should total up all file sizes to produce a total file size', function (done) {
     var totalSizePath = '_src/totalFileSize/';

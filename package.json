@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.3.5",
+    "chart.js": "^2.1.2",
     "filesize": "^3.3.0",
     "fs-extra": "^0.29.0",
     "gulp": "^3.9.1",

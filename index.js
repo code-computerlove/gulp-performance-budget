@@ -39,6 +39,7 @@ function performanceBudget (options) {
   function checkIfDestIsDefined () {
     if(options.dest === undefined) {
       options.dest = defaultFilePath;
+      return;
     }
   }
 
@@ -142,6 +143,7 @@ function performanceBudget (options) {
   function addBudgetToJsonFile () {
     if (options.budget === undefined) {
       options.budget = defaultBudget;
+      return;
     }
 
     if (perfObj.budget !== undefined) return;

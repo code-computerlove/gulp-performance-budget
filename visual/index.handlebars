@@ -8,214 +8,102 @@
 
 	<body>
 
-		<header class="header">
-			<div class="section">
-				<h1 class="title">Performance Budget</h1>
-			</div>
-		</header>
+		<section class="styleguide section clearfix">
+			<div class="colour white">#EAE7E2</div>
+			<div class="colour black">#302E2F</div>
+			<div class="colour blue">#648D93</div>
+			<div class="colour red">#A9564E</div>
+		</section>
 
 		<section class="performance-budget-graph section">
-			<h1 class="title">Performance Budget Graph</h1>
 			{{#each fileTypes}}
-				<div class="performance-budget-graph__item clearfix">
-					<div class="performance-budget-graph__content">{{@key}}</div>
-					<div class="performance-budget-graph__bar">
-						<div class="performance-budget-graph__test" style="width:{{percentage}}%;"></div>
+				<div class="performance-budget-graph__bar" style="width:{{percentage}}%;">{{percentage}}%</div>
+			{{/each}}
+		</section>
+
+		<nav class="performance-budget-key section">
+			<ul class="performance-budget-key__list">
+				{{#each fileTypes}}
+					<li class="performance-budget-key__list__item">
+						<a class="performance-budget-key__link" href="#" data-nav-item="{{@key}}">{{@key}}</a>
+					</li>
+				{{/each}}
+			</ul>
+		</nav>
+
+		<section class="performance-budget-details section">
+			{{#each fileTypes}}
+				<div class="performance-budget-details__item" data-details="{{@key}}">
+					<div class="performance-budget-details__bar" style="width:{{percentage}}%;"></div>
+					<div class="performance-budget-details__container">
+						<div class="performance-budget-details__stats">
+							<div class="performance-budget-details__stats__item">
+								<p class="performance-budget-details__stats__text">{{percentage}}%</p>
+							</div>
+							<div class="performance-budget-details__stats__item">
+								<p class="performance-budget-details__stats__text">{{total}} bytes</p>
+							</div>
+						</div>
+						<ul class="performance-budget-details__file-list">
+							<li class="performance-budget-details__file">
+								<p class="performance-budget-details__file-path">File Name</p>
+								<p class="performance-budget-details__file-size">File Size in bytes</p>
+							</li>
+							{{#each files}}
+								<li class="performance-budget-details__file">
+									<p class="performance-budget-details__file-path">{{file}}</p>
+									<p class="performance-budget-details__file-size">{{size}} bytes</p>
+								</li>
+							{{/each}}
+						</ul>
 					</div>
 				</div>
 			{{/each}}
 		</section>
 
-		<section class="performance-budget-cards section clearfix">
-		  <h1 class="title">Performance budget details</h1>
-		  {{#each fileTypes}}
-		    <div class="performance-budget-cards__item">
-
-		      <div class="performance-budget-cards__header">
-		        <h2>{{@key}}</h2>
-		      </div>
-
-					<div class="performance-budget-cards__bar">
-						<div class="performance-budget-cards__bar-inner" style="width:{{percentage}}%;"></div>
-					</div>
-
-					<div class="performance-budget-cards__stats">
-						<p>{{percentage}}%</p>
-						<p>{{total}} bytes</p>
-					</div>
-
-		      <ul class="performance-budget-cards__file-list">
-		        {{#each files}}
-		          <li class="performance-budget-cards__file">
-		            <p>{{file}}</p>
-		            <p>{{size}} bytes</p>
-		          </li>
-		        {{/each}}
-		      </ul>
-		    </div>
-		  {{/each}}
-		</section>
-
 	</body>
+
+	<script>
+
+		var navItem = document.querySelectorAll('[data-nav-item]');
+		var details = document.querySelectorAll('[data-details]');
+
+		var IS_HIDDEN = 'is-hidden';
+		var NAV_ITEM_IS_ACTIVE = 'performance-budget-key__list__item--active';
+
+		navItem[0].className += ' ' + NAV_ITEM_IS_ACTIVE;
+
+		for (var index = 0; index < navItem.length; index ++) {
+			hideDetails(index);
+			handleClick(index);
+		}
+
+		function handleClick (index) {
+			navItem[index].onclick = function () {
+
+				for (var i = 0; i < details.length; i ++) {
+					details[i].className += ' ' + IS_HIDDEN;
+					navItem[i].classList.remove(NAV_ITEM_IS_ACTIVE);
+				}
+
+				details[index].classList.remove(IS_HIDDEN);
+				navItem[index].className += ' ' + NAV_ITEM_IS_ACTIVE;
+			}
+		}
+
+		function hideDetails (index) {
+			if(index !== 0) {
+				details[index].className += ' ' + IS_HIDDEN;
+			}
+		}
+
+	</script>
 
 </html>
 
-
-
-	<!--
-
-  <section class="performance-budget">
-    <h1 class="performance-budget__title">Performance Budget</h1>
-
-  <div class="performance-budget-graph">
-
-    {{#each this}}
-      <div class="performance-budget-graph__item">
-        <div class="performance-budget-graph__content">{{@key}}</div>
-        <div class="performance-budget-graph__bar">
-          <div class="performance-budget-graph__test" style="width:{{percentage}}%;"></div>
-        </div>
-      </div>
-    {{/each}}
-
-  </div>
-  </section>
-
-
-
-
-
-
-
-
-<style>
-
-h1, h2, p {
-  margin: 0;
-}
-
-.performance-budget {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.performance-budget:after {
-  content: '';
-  clear: both;
-  display: table;
-}
-
-.performance-budget__title {
-  margin: 0;
-  font-size: 40px;
-}
-
-.performance-budget__graph {
-
-}
-
-.performance-budget__graph__item {
-  margin: 10px 0;
-  color: #FFF;
-  display: table;
-  width: 100%;
-  height: 50px;
-}
-
-.performance-budget__graph__item:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-.performance-budget__graph__content {
-  margin: 0;
-  width: 20%;
-  background: red;
-  display: table-cell;
-  vertical-align: middle;
-  padding: 0 10px;
-}
-
-.performance-budget__graph__bar {
-  background: green;
-  width: 80%;
-  display: table-cell;
-  position: relative;
-}
-
-.performance-budget__graph__test {
-  position: absolute;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: red;
-  mix-blend-mode: difference;
-}
-</style>
-
-<section class="performance-budget">
-  <h1 class="performance-budget__title">Performance Budget</h1>
-
-  <div class="performance-budget__graph">
-
-    {{#each this}}
-      <div class="performance-budget__graph__item">
-        <div class="performance-budget__graph__content">{{@key}}</div>
-        <div class="performance-budget__graph__bar">
-          <div class="performance-budget__graph__test" style="width:{{percentage}}%;"></div>
-        </div>
-      </div>
-    {{/each}}
-
-  </div>
+<!-- <section class="chart">
+	<canvas class="chart__item" data-chart-pie></canvas>
+	<canvas class="chart__item" data-chart-line></canvas>
 </section>
-
-
-<style>
-
-.performance-budget-details {
-  background: tomato;
-}
-
-.performance-budget-details:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-.performance-budget-details__item {
-  width: 50%;
-  display: inline-block;
-  float: left;
-  background: yellow;
-  padding: 20px 0;
-  border-top: 5px solid;
-  border-bottom: 5px solid;
-}
-
-</style>
-
-<section class="performance-budget-details">
-  <h1>Performance budget details</h1>
-  {{#each this}}
-    <div class="performance-budget-details__item">
-
-      <div class="performance-budget-details__header">
-        <h2>{{@key}}</h2>
-        <p>{{total}} bytes</p>
-      </div>
-
-      <div class="performance-budget-details__content">
-        {{#each files}}
-          <div class="performance-budget-details__file">
-            <p>{{file}}</p>
-            <p>{{size}} bytes</p>
-          </div>
-        {{/each}}
-      </div>
-
-    </div>
-  {{/each}}
-</section>
--->
+<script src="../Chart.min.js"></script>
+<script src="../index.js"></script> -->
