@@ -53,7 +53,7 @@ performanceBudget({dest: '/new-folder/performance-budget.json'})
 
 To define a personal budget you can pass the max file size as a parameter into performanceBudget.
 The file size input has to be a number and in bytes. If no file size is passed through it will
-default to 1400000 (1.4Mb).
+default to 60000 (60KB).
 
 ```javascript
 performanceBudget({budget: 100000})
