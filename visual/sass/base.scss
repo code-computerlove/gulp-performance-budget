@@ -17,7 +17,9 @@ body {
 }
 
 .is-hidden {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
 }
 
 p {

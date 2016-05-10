@@ -1,21 +1,28 @@
 .performance-budget-graph {
-  display: table;
+  background-color: $c-white;
+  padding: 1px;
 }
 
 .performance-budget-graph__bar {
+  width: auto;
+
+  background-color: $c-red;
   height: 50px;
-  display: table-cell;
-  background-color: #648D93;
-  border: 1px solid #EAE7E2;
-  color: #EAE7E2;
-  vertical-align: middle;
+  float: left;
+  border: 1px solid $c-white;
+  color: $c-white;
   text-align: center;
-  
-  &:nth-child(2n) {
-    background-color: #302E2F;
+  animation: 2s animateBar ease;
+
+  &:nth-child(3n-1) {
+    background-color: $c-black;
   }
 
-  &:nth-child(3n) {
-    background-color: #A9564E;
+  &:nth-child(3n+1) {
+    background-color: $c-blue;
   }
+}
+
+@keyframes animateBar {
+  0% { width: 0; }
 }

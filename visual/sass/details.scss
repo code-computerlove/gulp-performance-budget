@@ -11,6 +11,12 @@
 .performance-budget-details__bar {
   height: 10px;
   background-color: $c-black;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+
+  .is-hidden & {
+    width: 0!important;
+  }
 }
 
 .performance-budget-details__container {

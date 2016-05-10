@@ -153,13 +153,13 @@ describe('when running gulp-performance-budget', function () {
       fs.readFile(jsonFileTotalSize, 'utf-8', function(err, data){
         if(err) throw (err);
         var dataObj = JSON.parse(data);
-        dataObj.fileTypes.images.should.have.property('percentage').eql(79);
+        dataObj.fileTypes.images.should.have.property('percentage').eql(2);
         done();
       })
     });
   });
 
-  it('should calculate a percentage for each file type that all add up to 100', function (done) {
+  it('should calculate a percentage for each file which added to the remaining percentage equals 100', function (done) {
     gulp.src(testTotalSizeSrc)
     .pipe(performanceBudget({dest: jsonFileTotalSize}))
     .pipe(gulp.dest('dest'))
@@ -173,8 +173,10 @@ describe('when running gulp-performance-budget', function () {
         var jsPercentage = dataObj.fileTypes.js.percentage;
 
         var sumOfPercentage = imagesPercentage + cssPercentage + jsPercentage;
+        var remainingPercentage = Math.round((dataObj.remainingBudget / dataObj.budget) * 100);
+        var totalPercentage = sumOfPercentage + remainingPercentage;
 
-        sumOfPercentage.should.eql(100);
+        totalPercentage.should.eql(100);
 
         done();
       })
@@ -183,13 +185,13 @@ describe('when running gulp-performance-budget', function () {
 
   it('should allow a user to pass through a budget which is added to the json file', function (done) {
     gulp.src(testSrc)
-      .pipe(performanceBudget({dest: jsonFileAll, budget: 3000}))
+      .pipe(performanceBudget({dest: jsonFileAll, budget: 8000}))
       .pipe(gulp.dest('dest'))
       .on('end', function (err, data) {
       fs.readFile(jsonFileAll, 'utf8', function (err, data) {
         if (err) throw (err);
         var dataObj = JSON.parse(data);
-        dataObj.budget.should.eql(3000);
+        dataObj.budget.should.eql(8000);
         done();
       });
     });

@@ -15,13 +15,20 @@
 			<div class="colour red">#A9564E</div>
 		</section>
 
-		<section class="performance-budget-graph section">
+		<section class="performance-budget-graph section clearfix">
 			{{#each fileTypes}}
 				<div class="performance-budget-graph__bar" style="width:{{percentage}}%;">{{percentage}}%</div>
 			{{/each}}
 		</section>
 
 		<nav class="performance-budget-key section">
+
+			<ul class="performance-budget-key__list">
+				{{#each fileTypes}}
+					<div class="performance-budget-key__swatch"></div>
+				{{/each}}
+			</ul>
+
 			<ul class="performance-budget-key__list">
 				{{#each fileTypes}}
 					<li class="performance-budget-key__list__item">

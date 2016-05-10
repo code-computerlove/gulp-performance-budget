@@ -8,7 +8,7 @@
           "size": 1002
         }
       ],
-      "percentage": 79
+      "percentage": 2
     },
     "css": {
       "total": 57,
@@ -18,7 +18,7 @@
           "size": 57
         }
       ],
-      "percentage": 5
+      "percentage": 0
     },
     "js": {
       "total": 207,
@@ -28,10 +28,10 @@
           "size": 207
         }
       ],
-      "percentage": 16
+      "percentage": 0
     }
   },
   "totalSize": 1266,
-  "remainingBudget": 1398734,
-  "budget": 1400000
+  "remainingBudget": 58734,
+  "budget": 60000
 }

@@ -14,15 +14,24 @@
   width: 10%;
   background-color: $c-blue;
   border: 1px solid $c-white;
-
-  // &:nth-child(2n) {
-  //   background-color: $c-black;
-  // }
-  //
-  // &:nth-child(3n) {
-  //   // background-color: $c-red;
-  // }
 }
+
+.performance-budget-key__swatch {
+  background-color: $c-red;
+  width: 10%;
+  height: 10px;
+  display: table-cell;
+  border: 1px solid $c-white;
+
+  &:nth-child(3n-1) {
+    background-color: $c-black;
+  }
+
+  &:nth-child(3n+1) {
+    background-color: $c-blue;
+  }
+}
+
 
 .performance-budget-key__list__item--active {
   background-color: $c-black;

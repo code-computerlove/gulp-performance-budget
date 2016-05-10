@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var handlebars = require('gulp-compile-handlebars');
 var rename = require('gulp-rename');
-var data = require('../test/json/totalSize.json');
+var data = require('../test/json/allFiles.json');
 
 gulp.task('handlebars', function () {
 	var templateData = data,

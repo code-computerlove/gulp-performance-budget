@@ -12,7 +12,6 @@ var gulp = require('gulp');
 var rename = require('gulp-rename');
 var handlebars = require('gulp-compile-handlebars');
 
-var name;
 var obj = {};
 var perfObj = {};
 var currentFile;
@@ -21,8 +20,9 @@ var fonts = 'fonts';
 var svg = 'svg';
 
 var totalFileSize;
+var fontSize;
 
-var defaultBudget = 1400000;
+var defaultBudget = 60000;
 var defaultFilePath = './performanceBudget.json';
 
 // Consts
@@ -34,6 +34,7 @@ function performanceBudget (options) {
   perfObj = {};
   perfObj['fileTypes'] = {};
   totalFileSize = 0;
+  fontSize = 0;
   var options = extend({}, options);
 
   function checkIfDestIsDefined () {
@@ -68,6 +69,9 @@ function performanceBudget (options) {
     var fileSize = parseInt(getCurrentFileSize(file));
     totalFileSize += fileSize;
     if (!perfObj.fileTypes.hasOwnProperty (extname)) {
+
+      // console.log(extname);
+
       perfObj.fileTypes[extname] = { total: fileSize };
     } else {
       updateTotal(extname, fileSize);
@@ -77,7 +81,7 @@ function performanceBudget (options) {
   }
 
   function updateTotal (extname, fileSize) {
-    //do total
+    // do total
     var oldVal = perfObj.fileTypes[extname].total;
     var newVal = oldVal + fileSize;
     perfObj.fileTypes[extname].total = newVal;
@@ -94,13 +98,13 @@ function performanceBudget (options) {
   }
 
   function whichSvg (extname, type) {
-    //read svg file and see if property contains font reference
+    // read svg file and see if property contains font reference
 
-    //font-face
+    // font-face
     var fileContents = currentFile.contents.toString();
     var typeMatch = images;
 
-    if(fileContents.indexOf('font-face') > 0){
+    if (fileContents.indexOf('font-face') > 0){
       typeMatch = fonts;
     };
 
@@ -111,18 +115,20 @@ function performanceBudget (options) {
     var extRef = extname;
 
     // images
-    if((/(gif|jpg|jpeg|tiff|png)$/i).test(extRef)){
+    if ((/(gif|jpg|jpeg|tiff|png)$/i).test(extRef)){
        extRef = images;
     }
-    if(extRef === svg && whichSvg(extRef, images)){
+
+    if (extRef === svg && whichSvg(extRef, images)){
       extRef = images;
     }
 
     //fonts
-    if((/(woff|woff2|eot|ttf|otf)$/i).test(extRef)){
+    if ((/(woff|woff2|eot|ttf|otf)$/i).test(extRef)){
       extRef = fonts;
     }
-    if(extRef === svg && whichSvg(extRef, fonts)){
+
+    if (extRef === svg && whichSvg(extRef, fonts)){
       extRef = fonts;
     }
 
@@ -134,9 +140,14 @@ function performanceBudget (options) {
   }
 
   function calculatePercentageForEachFileType () {
-    for(var item in perfObj.fileTypes) {
-      var percentage = Math.round((perfObj.fileTypes[item].total / perfObj.totalSize) * 100);
-      perfObj.fileTypes[item]['percentage'] = percentage;
+    for (var item in perfObj.fileTypes) {
+      var percentage = Math.round((perfObj.fileTypes[item].total / perfObj.budget) * 100);
+
+      if(perfObj.fileTypes[item].percentage === undefined) {
+        perfObj.fileTypes[item]['percentage'] = percentage;
+      }
+
+      perfObj.fileTypes[item].percentage = percentage;
     }
   }
 
