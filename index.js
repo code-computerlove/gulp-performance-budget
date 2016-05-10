@@ -9,8 +9,6 @@ var extend = require('node.extend');
 var mkpath = require('mkpath');
 
 var gulp = require('gulp');
-var rename = require('gulp-rename');
-var handlebars = require('gulp-compile-handlebars');
 
 var obj = {};
 var perfObj = {};
