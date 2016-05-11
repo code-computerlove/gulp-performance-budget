@@ -197,7 +197,7 @@ describe('when running gulp-performance-budget', function () {
     });
   });
 
-  it('should allow a user to pass through a budget which is added to the json file', function (done) {
+  it('should workout the remaning budget based off the passed in budget and totalsize', function (done) {
     gulp.src(testTotalSizeSrc)
       .pipe(performanceBudget({dest: jsonFileTotalSize, budget: 3000}))
       .pipe(gulp.dest('dest'))

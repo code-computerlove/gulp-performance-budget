@@ -4,7 +4,6 @@ var fs = Promise.promisifyAll(require('fs-extra'));
 var path = require('path');
 var PluginError = require('plugin-error');
 var pathExists = require('path-exists');
-var getFileSize = require('filesize');
 var extend = require('node.extend');
 var mkpath = require('mkpath');
 
@@ -55,7 +54,7 @@ function performanceBudget (options) {
   };
 
   function getCurrentFileSize (file) {
-    return file.stat ? getFileSize(file.stat.size) : getFileSize(Buffer.byteLength(String(file.contents)));
+    return file.stat.size;
   }
 
   function getFileExtension (file) {

@@ -11,14 +11,14 @@
       "percentage": 2
     },
     "css": {
-      "total": 57,
+      "total": 27530,
       "files": [
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/info.css",
-          "size": 57
+          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/main.css",
+          "size": 27530
         }
       ],
-      "percentage": 0
+      "percentage": 46
     },
     "js": {
       "total": 207,
@@ -31,7 +31,7 @@
       "percentage": 0
     }
   },
-  "totalSize": 1266,
-  "remainingBudget": 58734,
+  "totalSize": 28739,
+  "remainingBudget": 31261,
   "budget": 60000
 }
