@@ -146,11 +146,11 @@ function performanceBudget (options) {
   function addBudgetToJsonFile () {
     if (options.budget === undefined) {
       options.budget = defaultBudget;
-      return;
     }
 
-    if (perfObj.budget !== undefined) return;
-    perfObj['budget'] = options.budget;
+    if (perfObj.budget === undefined) {
+      perfObj['budget'] = options.budget;
+    }
   }
 
   function addRemainingBudgetToJsonFile () {
@@ -171,10 +171,11 @@ function performanceBudget (options) {
 
     currentFile = file;
 
+    addBudgetToJsonFile();
     checkIfDestIsDefined();
 
     // TODO these need promises to avoid race conditions;
-    addBudgetToJsonFile();
+
     buildPerfObjects(getFileExtension(file), file);
     pushTotalFileSizeToJson();
     calculatePercentageForEachFileType();
