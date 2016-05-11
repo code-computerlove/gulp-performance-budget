@@ -64,9 +64,7 @@ function performanceBudget (options) {
   function buildPerfObjects (extname, file) {
     extname = setExtensionRef(extname);
 
-    if(!extname) {
-      return;
-    }
+    if(!extname) return;
 
     var fileSize = parseInt(getCurrentFileSizeInKB(file));
     totalFileSize += fileSize;
@@ -111,7 +109,7 @@ function performanceBudget (options) {
   function setExtensionRef (extname) {
     var extRef = extname;
 
-    if ((/(map)$/i).test(extRef)){
+    if ((/(map|ico)$/i).test(extRef)){
       return false;
     }
 

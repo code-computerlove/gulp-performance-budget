@@ -6,6 +6,7 @@ The task will create an object based on the file extension.
 
 * All images types will be grouped under the key "image"
 * All font types will be grouped under the key "fonts"
+* Maps and ico files will be ignored
 
 SVG's are determined based on the "font-face" attribute being present. If not present it will be grouped under the images key.
 
