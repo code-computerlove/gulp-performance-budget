@@ -53,8 +53,8 @@ function performanceBudget (options) {
     });
   };
 
-  function getCurrentFileSize (file) {
-    return file.stat.size;
+  function getCurrentFileSizeInKB (file) {
+    return file.stat.size; // / 1024;
   }
 
   function getFileExtension (file) {
@@ -63,7 +63,7 @@ function performanceBudget (options) {
 
   function buildPerfObjects (extname, file) {
     extname = setExtensionRef(extname);
-    var fileSize = parseInt(getCurrentFileSize(file));
+    var fileSize = parseInt(getCurrentFileSizeInKB(file));
     totalFileSize += fileSize;
     if (!perfObj.fileTypes.hasOwnProperty (extname)) {
 
@@ -78,15 +78,12 @@ function performanceBudget (options) {
   }
 
   function updateTotal (extname, fileSize) {
-    // do total
     var oldVal = perfObj.fileTypes[extname].total;
     var newVal = oldVal + fileSize;
     perfObj.fileTypes[extname].total = newVal;
   }
 
   function updatePropValue (extname, fileSize) {
-
-    //add files
     if (!perfObj.fileTypes[extname].hasOwnProperty ('files')) {
       perfObj.fileTypes[extname].files = [];
     }
@@ -95,9 +92,7 @@ function performanceBudget (options) {
   }
 
   function whichSvg (extname, type) {
-    // read svg file and see if property contains font reference
-
-    // font-face
+    // read svg file and see if property contains font reference: font-face
     var fileContents = currentFile.contents.toString();
     var typeMatch = images;
 

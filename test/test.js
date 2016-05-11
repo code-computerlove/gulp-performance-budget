@@ -21,9 +21,9 @@ var jsonFileImage = jsonSrc + 'imageFiles.json';
 var jsonFileAll = jsonSrc + 'allFiles.json';
 var jsonFileTotalSize = jsonSrc + 'totalSize.json';
 
-function getFilesizeInBytes(filename) {
+function getFilesize(filename) {
  var stats = fs.statSync(filename);
- var fileSizeInBytes = stats["size"];
+ var fileSizeInBytes = stats.size; // / 1024;
  return fileSizeInBytes;
 };
 
@@ -127,7 +127,7 @@ describe('when running gulp-performance-budget', function () {
 
         if(fileName !== '.DS_Store') {
           var tempPath = totalSizePath + fileName;
-          total += getFilesizeInBytes(tempPath);
+          total += getFilesize(tempPath);
         }
       }
     });
