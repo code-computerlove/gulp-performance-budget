@@ -13,6 +13,7 @@ var testCSSSrc = '_src/styles/**/*.css';
 var testJSSrc = '_src/scripts/**/*.js';
 var testImageSrc = '_src/images/**/*';
 var testTotalSizeSrc = '_src/totalFileSize/**/*';
+var testSassMapsSrc = '_src/styles/**/*';
 
 var jsonSrc = './test/json/';
 var jsonFileCSS = jsonSrc + 'cssFiles.json';
@@ -20,6 +21,7 @@ var jsonFileJS = jsonSrc + 'JSFiles.json';
 var jsonFileImage = jsonSrc + 'imageFiles.json';
 var jsonFileAll = jsonSrc + 'allFiles.json';
 var jsonFileTotalSize = jsonSrc + 'totalSize.json';
+var jsonFileSassMaps = jsonSrc + 'sassMaps.json';
 
 function getFilesize(filename) {
  var stats = fs.statSync(filename);
@@ -223,6 +225,20 @@ describe('when running gulp-performance-budget', function () {
         if (err) throw (err);
         var dataObj = JSON.parse(data);
         data.length.should.be.above(0);
+        done();
+      });
+    });
+  });
+
+  it('should not include sass maps in performance budget', function (done) {
+    gulp.src(testSassMapsSrc)
+      .pipe(performanceBudget({dest: jsonFileSassMaps}))
+      .pipe(gulp.dest('dest'))
+      .on('end', function (err, data) {
+      fs.readFile(jsonFileSassMaps, 'utf8', function (err, data) {
+        if (err) throw (err);
+        var dataObj = JSON.parse(data);
+        dataObj.fileTypes.should.not.have.property('map');
         done();
       });
     });
