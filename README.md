@@ -69,23 +69,23 @@ performanceBudget({budget: 100000})
       "total": 241,
       "files": [
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.svg",
+          "file": "/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.svg",
           "size": 98
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.ttf",
+          "file": "/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.ttf",
           "size": 61
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff",
+          "file": "/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff",
           "size": 30
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff2",
+          "file": "/performance-budget/_src/fonts/gt-pressura-mono-regular-webfont.woff2",
           "size": 23
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/fonts/gt-pressura-regular-webfont.eot",
+          "file": "/performance-budget/_src/fonts/gt-pressura-regular-webfont.eot",
           "size": 29
         }
       ],
@@ -95,23 +95,23 @@ performanceBudget({budget: 100000})
       "total": 2924,
       "files": [
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/images/cl-logo.svg",
+          "file": "/performance-budget/_src/images/cl-logo.svg",
           "size": 906
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/images/images.jpg",
+          "file": "/performance-budget/_src/images/images.jpg",
           "size": 12
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/images/imgres-1.png",
+          "file": "/performance-budget/_src/images/imgres-1.png",
           "size": 1002
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/images/imgres.png",
+          "file": "/performance-budget/_src/images/imgres.png",
           "size": 2
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/imgres-1.png",
+          "file": "/performance-budget/_src/totalFileSize/imgres-1.png",
           "size": 1002
         }
       ],
@@ -121,11 +121,11 @@ performanceBudget({budget: 100000})
       "total": 414,
       "files": [
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/scripts/test.js",
+          "file": "/performance-budget/_src/scripts/test.js",
           "size": 207
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/test.js",
+          "file": "/performance-budget/_src/totalFileSize/test.js",
           "size": 207
         }
       ],
@@ -135,23 +135,23 @@ performanceBudget({budget: 100000})
       "total": 142,
       "files": [
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/styles/info.css",
+          "file": "/performance-budget/_src/styles/info.css",
           "size": 57
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/styles/other.css",
+          "file": "/performance-budget/_src/styles/other.css",
           "size": 0
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/styles/other2.css",
+          "file": "/performance-budget/_src/styles/other2.css",
           "size": 0
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/styles/test.css",
+          "file": "/performance-budget/_src/styles/test.css",
           "size": 28
         },
         {
-          "file": "/Users/matthewmacartney/Development/Code/performance-budget/_src/totalFileSize/info.css",
+          "file": "/performance-budget/_src/totalFileSize/info.css",
           "size": 57
         }
       ],
