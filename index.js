@@ -164,6 +164,11 @@ function performanceBudget (options) {
     perfObj['remainingBudget'] = perfObj.budget - perfObj.totalSize;
   }
 
+  function setCurrentFile(file) {
+    currentFile = file
+    return Promise.resolve();
+  }
+
   function generate (file, enc, cb) {
 
     if (file.isNull()) {
@@ -176,21 +181,19 @@ function performanceBudget (options) {
       return;
     };
 
-    currentFile = file;
+    return setCurrentFile(file)
+      .then(function() {
+        addBudgetToJsonFile();
+        checkIfDestIsDefined();
+        buildPerfObjects(getFileExtension(file), file);
+        pushTotalFileSizeToJson();
+        calculatePercentageForEachFileType();
+        addRemainingBudgetToJsonFile();
 
-    addBudgetToJsonFile();
-    checkIfDestIsDefined();
+        writeToFile();
 
-    // TODO these need promises to avoid race conditions;
-
-    buildPerfObjects(getFileExtension(file), file);
-    pushTotalFileSizeToJson();
-    calculatePercentageForEachFileType();
-    addRemainingBudgetToJsonFile();
-
-    writeToFile();
-
-    cb();
+        cb();
+      });
 
   };
 
