@@ -37,8 +37,9 @@ function performanceBudget (options) {
   function checkIfDestIsDefined () {
     if(options.dest === undefined) {
       options.dest = defaultFilePath;
-      return;
     }
+
+    return Promise.resolve();
   }
 
   function getPath (fullPath) {
@@ -48,7 +49,7 @@ function performanceBudget (options) {
   function writeToFile () {
     var pathStr = getPath(options.dest);
     mkpath.sync(pathStr);
-    fs.writeJson(options.dest, perfObj, function (err, data) {
+    return fs.writeJsonAsync(options.dest, perfObj, function (err, data) {
       if (err) throw (err);
     });
   };
@@ -78,6 +79,8 @@ function performanceBudget (options) {
     }
 
     updatePropValue(extname, fileSize);
+
+    return Promise.resolve();
   }
 
   function updateTotal (extname, fileSize) {
@@ -136,6 +139,8 @@ function performanceBudget (options) {
 
   function pushTotalFileSizeToJson () {
     perfObj['totalSize'] = totalFileSize;
+
+    return Promise.resolve();
   }
 
   function calculatePercentageForEachFileType () {
@@ -158,10 +163,14 @@ function performanceBudget (options) {
     if (perfObj.budget === undefined) {
       perfObj['budget'] = options.budget;
     }
+
+    return Promise.resolve();
   }
 
   function addRemainingBudgetToJsonFile () {
     perfObj['remainingBudget'] = perfObj.budget - perfObj.totalSize;
+
+    return Promise.resolve();
   }
 
   function setCurrentFile(file) {
@@ -169,32 +178,29 @@ function performanceBudget (options) {
     return Promise.resolve();
   }
 
-  function generate (file, enc, cb) {
+  function generate (file, encoding, callback) {
 
     if (file.isNull()) {
-      cb();
+      callback();
       return;
     }
 
     if (file.isStream()) {
-      cb(new PluginError(PLUGIN_NAME, 'Streaming not supported'));
+      callback(new PluginError(PLUGIN_NAME, 'Streaming not supported'));
       return;
     };
 
     return setCurrentFile(file)
+      .then(addBudgetToJsonFile)
+      .then(checkIfDestIsDefined)
       .then(function() {
-        addBudgetToJsonFile();
-        checkIfDestIsDefined();
-        buildPerfObjects(getFileExtension(file), file);
-        pushTotalFileSizeToJson();
-        calculatePercentageForEachFileType();
-        addRemainingBudgetToJsonFile();
-
-        writeToFile();
-
-        cb();
-      });
-
+        return buildPerfObjects(getFileExtension(file), file);
+      })
+      .then(pushTotalFileSizeToJson)
+      .then(calculatePercentageForEachFileType)
+      .then(addRemainingBudgetToJsonFile)
+      .then(writeToFile)
+      .then(callback);
   };
 
   return through.obj(generate);
