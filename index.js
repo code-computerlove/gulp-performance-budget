@@ -5,7 +5,6 @@ var path = require('path');
 var PluginError = require('plugin-error');
 var pathExists = require('path-exists');
 var extend = require('node.extend');
-// var mkpath = require('mkpath');
 
 var gulp = require('gulp');
 
