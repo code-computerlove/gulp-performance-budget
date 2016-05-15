@@ -5,7 +5,7 @@ var path = require('path');
 var PluginError = require('plugin-error');
 var pathExists = require('path-exists');
 var extend = require('node.extend');
-var mkpath = require('mkpath');
+// var mkpath = require('mkpath');
 
 var gulp = require('gulp');
 
@@ -48,10 +48,13 @@ function performanceBudget (options) {
 
   function writeToFile () {
     var pathStr = getPath(options.dest);
-    mkpath.sync(pathStr);
-    return fs.writeJsonAsync(options.dest, perfObj, function (err, data) {
-      if (err) throw (err);
-    });
+
+    return fs.ensureDirAsync(pathStr)
+      .then(function() {
+        return fs.writeJsonAsync(options.dest, perfObj, function (err, data) {
+          if (err) throw (err);
+        });
+      })
   };
 
   function getCurrentFileSizeInKB (file) {
@@ -70,9 +73,6 @@ function performanceBudget (options) {
     var fileSize = parseInt(getCurrentFileSizeInKB(file));
     totalFileSize += fileSize;
     if (!perfObj.fileTypes.hasOwnProperty (extname)) {
-
-      // console.log(extname);
-
       perfObj.fileTypes[extname] = { total: fileSize };
     } else {
       updateTotal(extname, fileSize);
