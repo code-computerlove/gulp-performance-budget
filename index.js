@@ -3,7 +3,6 @@ var Promise = require('bluebird');
 var fs = Promise.promisifyAll(require('fs-extra'));
 var path = require('path');
 var PluginError = require('plugin-error');
-var pathExists = require('path-exists');
 var extend = require('node.extend');
 
 var gulp = require('gulp');
