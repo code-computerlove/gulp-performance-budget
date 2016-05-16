@@ -4,7 +4,7 @@ A task to produce a json output of the client side assets (file size) used on yo
 
 The task will create an object based on the file extension.
 
-* All images types will be grouped under the key "image"
+* All image types will be grouped under the key "image"
 * All font types will be grouped under the key "fonts"
 * Maps and ico files will be ignored
 

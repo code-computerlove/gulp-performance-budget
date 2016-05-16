@@ -6,7 +6,6 @@ var Promise = require('bluebird');
 var fs = Promise.promisifyAll(require('fs-extra'));
 var performanceBudget = require('../index');
 var through = require('through2');
-var getFileSize = require('filesize');
 
 var testSrc = '_src/**/*';
 var testCSSSrc = '_src/styles/**/*.css';
