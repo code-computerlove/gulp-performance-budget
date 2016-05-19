@@ -19,6 +19,11 @@ var fontSize;
 
 var defaultBudget = 60000;
 var defaultFilePath = './performanceBudget.json';
+var defaultSpeed = 366;
+var opts = {
+  connection: '3g',
+  speed: defaultSpeed
+}
 
 // Consts
 const PLUGIN_NAME = 'performance-budget';
@@ -30,7 +35,7 @@ function performanceBudget (options) {
   perfObj['fileTypes'] = {};
   totalFileSize = 0;
   fontSize = 0;
-  var options = extend({}, options);
+  options = extend(opts, options);
 
   function checkIfDestIsDefined () {
     if(options.dest === undefined) {
@@ -141,6 +146,14 @@ function performanceBudget (options) {
     return Promise.resolve();
   }
 
+  function pushPageSpeedToJson(){
+    perfObj['pageSpeed'] = {
+      'speed': getPageSpeed((totalFileSize/1024), options.connection),
+      'connection': options.connection
+    }
+    return Promise.resolve();
+  }
+
   function calculatePercentageForEachFileType () {
     for (var item in perfObj.fileTypes) {
       var percentage = Math.round((perfObj.fileTypes[item].total / perfObj.budget) * 100);
@@ -151,6 +164,25 @@ function performanceBudget (options) {
 
       perfObj.fileTypes[item].percentage = percentage;
     }
+  }
+
+  function getConnectionSpeed(connection){
+    var connection = connection || options.connection;
+    var speed;
+    //console.log(options);
+    switch(connection){
+      case '3g': speed = 366;
+      break;
+      case '4g': speed = 1024;
+      break;
+      default: speed;
+    }
+    return speed;
+  }
+
+  function getPageSpeed(weight, connection){
+    var speed = getConnectionSpeed(opts.connection) || opts.speed;
+    return weight / speed;
   }
 
   function addBudgetToJsonFile () {
@@ -195,6 +227,7 @@ function performanceBudget (options) {
         return buildPerfObjects(getFileExtension(file), file);
       })
       .then(pushTotalFileSizeToJson)
+      .then(pushPageSpeedToJson)
       .then(calculatePercentageForEachFileType)
       .then(addRemainingBudgetToJsonFile)
       .then(writeToFile)

@@ -243,4 +243,21 @@ describe('when running gulp-performance-budget', function () {
     });
   });
 
+  it('should return a page speed value of 4', function(){
+    var result = 0;
+    var connectionSpeed = 366;
+    gulp.src(testTotalSizeSrc)
+      .pipe(performanceBudget({speed: connectionSpeed}))
+      .pipe(gulp.dest('dest'))
+      .on('end', function (err, data) {
+      fs.readFile(jsonFileTotalSize, 'utf8', function (err, data) {
+        if (err) throw (err);
+        var dataObj = JSON.parse(data);
+        var pageSpeed = dataObj.pageSpeed.speed;
+        pageSpeed.should.be.greaterThan(0);
+        done();
+      });
+    });
+  })
+
 });
