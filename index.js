@@ -15,6 +15,7 @@ var fonts = 'fonts';
 var svg = 'svg';
 
 var totalFileSize;
+var humanTotalFileSize;
 var fontSize;
 
 var defaultBudget = 60000;
@@ -24,6 +25,8 @@ var opts = {
   connection: '3g',
   speed: defaultSpeed
 }
+
+var bytes = 1024;
 
 // Consts
 const PLUGIN_NAME = 'performance-budget';
@@ -148,7 +151,7 @@ function performanceBudget (options) {
 
   function pushPageSpeedToJson(){
     perfObj['pageSpeed'] = {
-      'speed': getPageSpeed((totalFileSize/1024), options.connection),
+      'speed': getPageSpeed((totalFileSize), options.connection),
       'connection': options.connection
     }
     return Promise.resolve();
@@ -166,6 +169,22 @@ function performanceBudget (options) {
     }
   }
 
+  function humanFileSize(bytes, si) {
+    var thresh = si ? 1000 : 1024;
+    if(Math.abs(bytes) < thresh) {
+        return bytes + ' B';
+    }
+    var units = si
+        ? ['kB','MB','GB','TB','PB','EB','ZB','YB']
+        : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+    var u = -1;
+    do {
+        bytes /= thresh;
+        ++u;
+    } while(Math.abs(bytes) >= thresh && u < units.length - 1);
+    return bytes.toFixed(1)+' '+units[u];
+  }
+
   function getConnectionSpeed(connection){
     var connection = connection || options.connection;
     var speed;
@@ -177,12 +196,13 @@ function performanceBudget (options) {
       break;
       default: speed;
     }
-    return speed;
+
+    return (speed*bytes);
   }
 
   function getPageSpeed(weight, connection){
     var speed = getConnectionSpeed(opts.connection) || opts.speed;
-    return weight / speed;
+    return (weight / speed).toFixed(2) + 's';
   }
 
   function addBudgetToJsonFile () {

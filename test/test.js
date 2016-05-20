@@ -21,6 +21,7 @@ var jsonFileImage = jsonSrc + 'imageFiles.json';
 var jsonFileAll = jsonSrc + 'allFiles.json';
 var jsonFileTotalSize = jsonSrc + 'totalSize.json';
 var jsonFileSassMaps = jsonSrc + 'sassMaps.json';
+var jsonFilePageSpeed = jsonSrc + 'pageSpeed.json';
 
 function getFilesize(filename) {
  var stats = fs.statSync(filename);
@@ -243,18 +244,18 @@ describe('when running gulp-performance-budget', function () {
     });
   });
 
-  it('should return a page speed value of 4', function(){
+  it('should return a page speed value of 0.08s', function (done){
     var result = 0;
     var connectionSpeed = 366;
     gulp.src(testTotalSizeSrc)
-      .pipe(performanceBudget({speed: connectionSpeed}))
+      .pipe(performanceBudget({speed: connectionSpeed, dest: jsonFilePageSpeed}))
       .pipe(gulp.dest('dest'))
       .on('end', function (err, data) {
-      fs.readFile(jsonFileTotalSize, 'utf8', function (err, data) {
+      fs.readFile(jsonFilePageSpeed, 'utf8', function (err, data) {
         if (err) throw (err);
         var dataObj = JSON.parse(data);
         var pageSpeed = dataObj.pageSpeed.speed;
-        pageSpeed.should.be.greaterThan(0);
+        pageSpeed.should.eql('0.08s');
         done();
       });
     });
