@@ -169,20 +169,18 @@ function performanceBudget (options) {
     }
   }
 
-  function humanFileSize(bytes, si) {
-    var thresh = si ? 1000 : 1024;
-    if(Math.abs(bytes) < thresh) {
+  function humanFileSize(val) {
+    var thresh = bytes;
+    if(Math.abs(val) < thresh) {
         return bytes + ' B';
     }
-    var units = si
-        ? ['kB','MB','GB','TB','PB','EB','ZB','YB']
-        : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+    var units = ['kB','MB','GB','TB','PB','EB','ZB','YB']
     var u = -1;
     do {
-        bytes /= thresh;
+        val /= thresh;
         ++u;
-    } while(Math.abs(bytes) >= thresh && u < units.length - 1);
-    return bytes.toFixed(1)+' '+units[u];
+    } while(Math.abs(val) >= thresh && u < units.length - 1);
+    return val.toFixed(1)+' '+units[u];
   }
 
   function getConnectionSpeed(connection){
@@ -190,12 +188,19 @@ function performanceBudget (options) {
     var speed;
     //console.log(options);
     switch(connection){
-      case '3g': speed = 366;
+      case '3g': speed = 750;
       break;
-      case '4g': speed = 1024;
+      case '4g': speed = (bytes*4);
+      break;
+      case 'dsl': speed = (bytes*2);
+      break;
+      case 'wifi': speed = (bytes*30);
       break;
       default: speed;
     }
+
+    console.log(speed);
+    console.log(connection);
 
     return (speed*bytes);
   }

@@ -244,18 +244,18 @@ describe('when running gulp-performance-budget', function () {
     });
   });
 
-  it('should return a page speed value of 0.08s', function (done){
+  it('should return a page speed value of 0.08s when 3g connection', function (done){
     var result = 0;
-    var connectionSpeed = 366;
+    var connectionSpeed = '3g';
     gulp.src(testTotalSizeSrc)
-      .pipe(performanceBudget({speed: connectionSpeed, dest: jsonFilePageSpeed}))
+      .pipe(performanceBudget({connection: connectionSpeed, dest: jsonFilePageSpeed}))
       .pipe(gulp.dest('dest'))
       .on('end', function (err, data) {
       fs.readFile(jsonFilePageSpeed, 'utf8', function (err, data) {
         if (err) throw (err);
         var dataObj = JSON.parse(data);
         var pageSpeed = dataObj.pageSpeed.speed;
-        pageSpeed.should.eql('0.08s');
+        pageSpeed.should.eql('0.04s');
         done();
       });
     });
