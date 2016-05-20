@@ -46,6 +46,12 @@ gulp.task('default', function(){
 
 ###Options
 
+|Option      |Type     |
+|------------|---------|
+|dest        |string   |
+|budget      |number   |
+|conneciton  |string   |
+
 For a different file location pass the location as a parameter into performanceBudget.
 
 ```javascript
@@ -58,7 +64,17 @@ default to 60000 (60KB).
 
 ```javascript
 performanceBudget({budget: 100000})
+
 ```
+
+Connection speed can be passed through as a string. Values are based on Google Chrome's Throttling values
+
+options are...
+
+'3g'
+'4g'
+'dsl'
+'wifi'
 
 ###Example of output
 
